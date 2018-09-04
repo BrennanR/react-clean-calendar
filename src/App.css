@@ -1,0 +1,8 @@
+.App {
+  text-align: center;
+}
+
+.calendar-day {
+  flex: 1;
+  height: 100%;
+}

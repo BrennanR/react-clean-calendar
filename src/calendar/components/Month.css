@@ -1,0 +1,17 @@
+.Month-month {
+  /* height: 100%; */
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  align-items: stretch;
+}
+
+.Month-week {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+.Month-day {
+  flex: 1;
+}
