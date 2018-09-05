@@ -9,7 +9,8 @@ import "./Month.css";
 type MonthProps = {
   year: number,
   month: number,
-  renderDay: (date: Date) => Node,
+  renderDay: (date: Date, cellID: string) => Node,
+  onDayPress: (date: Date, cellID: string) => void,
 };
 
 const daysPerWeek = 7;
@@ -47,21 +48,24 @@ export const Month = (props: MonthProps) => {
       weekPerMonthRange.map(weekOfMonthIndex => (
         <div key={weekOfMonthIndex} className="Month-week">
         {
-          dayPerWeekRange.map(weekdayIndex => (
-            <div 
-              style={{ ...borderStyle(weekdayIndex, weekOfMonthIndex, weekPerMonthRange.length - 1)}} 
-              key={weekdayIndex} 
-              className="Month-day Month-day-{weekdayIndex}"
-            >
-              {props.renderDay(
-                dateOfCalendarWeekAndWeekdayIndex(
-                  props.year,
-                  props.month,
-                  dayOfMonth(weekOfMonthIndex, weekdayIndex, weekdayOfTheFirst)
-                )
-              )}
-            </div>
-          ))
+          dayPerWeekRange.map(weekdayIndex => {
+            const cellDate = dateOfCalendarWeekAndWeekdayIndex(
+              props.year,
+              props.month,
+              dayOfMonth(weekOfMonthIndex, weekdayIndex, weekdayOfTheFirst)
+            );
+            const cellID = `${weekOfMonthIndex}-${weekdayIndex}`;
+            return (
+              <div 
+                style={{ ...borderStyle(weekdayIndex, weekOfMonthIndex, weekPerMonthRange.length - 1)}} 
+                key={weekdayIndex} 
+                className="Month-day Month-day-{cellID}"
+                onClick={() => props.onDayPress(cellDate, cellID)}
+              >
+                {props.renderDay(cellDate, cellID)}
+              </div>
+            );
+          })
         }
         </div>
       ))
