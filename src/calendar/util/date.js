@@ -91,6 +91,11 @@ export function calendarWeeksInMonth(year: number, month: number, firstCalendarW
   return Math.ceil(daysInMonthExcludingFirstWeek / 7) + 1;
 }
 
+export function longMonthName(locale: string, year: number, month: number) {
+  const firstOfMonth = new Date(year, month-1, 1); // Convert from 1-indexed to 0-indexed.
+  return firstOfMonth.toLocaleDateString(locale, { month: "long", year: "numeric" })
+}
+
 export function nextMonth(year: number, month: number) {
   if (month === 12) {
     return {year: year + 1, month: 1};

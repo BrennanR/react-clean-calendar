@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 
 import { Calendar } from '../calendar/Calendar';
+import { DefaultHeading } from '../calendar/components/defaults/DefaultHeading';
+import { longMonthName, nextMonth, previousMonth } from '../calendar/util/date';
 
 type State = {
   year: number,
@@ -16,6 +18,8 @@ type Props = {};
  *  component's state.
  */
 export class Example1 extends Component<Props, State> {
+  locale = "en-us";
+
   constructor(props: Props) {
     super(props);
     const date = new Date();
@@ -32,7 +36,7 @@ export class Example1 extends Component<Props, State> {
 
   renderDay = (date: Date, cellID: string, selectedYear: number, selectedMonth: number) => {
     const dayNumber = date.getDate();
-    const dayText = dayNumber === 1 ? `${date.toLocaleDateString("en-us", {month: 'short'})} ${dayNumber}` : dayNumber;
+    const dayText = dayNumber === 1 ? `${date.toLocaleDateString(this.locale, {month: 'short'})} ${dayNumber}` : dayNumber;
     const selectedMonthStartDate = new Date(selectedYear, selectedMonth - 1, 1); // first day of month.
     const selectedMonthEndDate = new Date(selectedYear, selectedMonth, 0); // last day of month.
     const dayIsInSelectedMonth = date >= selectedMonthStartDate && date <= selectedMonthEndDate;
@@ -55,17 +59,32 @@ export class Example1 extends Component<Props, State> {
     );
   }
 
+  renderHeading = () => {
+    return (
+      <DefaultHeading
+        title={longMonthName(this.locale, this.state.year, this.state.month)}
+        onNextMonthClicked={() => {
+          const { year, month } = nextMonth(this.state.year, this.state.month);
+          this.setState({ year, month });
+        }}
+        onPreviousMonthClicked={() => {
+          const { year, month } = previousMonth(this.state.year, this.state.month);
+          this.setState({ year, month });
+        }}
+      />
+    );
+  };
+
   render() {
     return (
       <Calendar
-        locale="en-us"
+        locale={this.locale}
         year={this.state.year}
         month={this.state.month}
         renderDay={(date, cellID) => this.renderDay(date, cellID, this.state.year, this.state.month)}
+        renderHeading={this.renderHeading}
         borderOptions={{ width: 1, color: "black" }}
         onDayPress={this.onDayPress}
-        onNextMonthClicked={(year, month) => this.setState({ year, month })}
-        onPreviousMonthClicked={(year, month) => this.setState({ year, month })}
       />
     );
   }
