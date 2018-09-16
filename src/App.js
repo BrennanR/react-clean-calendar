@@ -57,9 +57,11 @@ class App extends Component<Props, State> {
     return (
       <div style={{ display: "flex", width: "100%", height: "100%", }} className="App">
         <Calendar
+          locale="en-ca"
           year={this.state.year}
           month={this.state.month}
           renderDay={(date, cellID) => this.renderDay(date, cellID, this.state.year, this.state.month)}
+          borderOptions={{ width: 1, color: "black" }}
           onDayPress={this.onDayPress}
           onNextMonthClicked={(year, month) => this.setState({ year, month })}
           onPreviousMonthClicked={(year, month) => this.setState({ year, month })}

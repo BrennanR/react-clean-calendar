@@ -1,17 +1,24 @@
 // @flow
 
+import type { Weekday } from '../types';
+
 // These are indexed the same as Date.prototype.getDay() indexes the days of the week.
-const weekdays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-// There's no good way to create a type from 'weekdays' in flow, so redefine the list.
-type Weekday = "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
+// const weekdays = [
+//   "Sunday",
+//   "Monday",
+//   "Tuesday",
+//   "Wednesday",
+//   "Thursday",
+//   "Friday",
+//   "Saturday",
+// ];
+type Week = [string, string, string, string, string, string, string];
+
+// Adapted from: https://stackoverflow.com/a/33451102/932896
+function arrayRotate(arr, count) {
+  count -= arr.length * Math.floor(count / arr.length)
+  return  [...arr.slice(count), ...arr.splice(0, count)];
+}
 
 // https://stackoverflow.com/a/11252167/932896
 function treatAsUTC(date: Date): Date {
@@ -25,20 +32,41 @@ function treatAsUTC(date: Date): Date {
  * https://stackoverflow.com/a/11252167/932896
  */
 function daysBetween(startDate: Date, endDate: Date): number {
-    const millisecondsPerDay = 24 * 60 * 60 * 1000;
-    return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+}
+
+export function localizedWeekdayNames(locale: string): Week {
+  // January 4th, 1970, 00:00:00. The first Sunday after the epoch.
+  const sunday = new Date(259200000);
+  return ((Array(7).fill().map((_, i) => {
+    const date = new Date(sunday.valueOf());
+    date.setDate(date.getDate() + i);
+    return date.toLocaleDateString(locale, {weekday: 'long', timeZone: "utc"});
+  }): any): Week);
+}
+
+/**
+ * firstWeekDay The first week day based on Javascript's native getDay() method where Sun = 0 ... Sat = 6. eg. If you
+ *    want to indicate Mon, supply the value '1'.
+ */
+export function weekOrderedByGivenFirstWeekday(locale: string, firstWeekDay: Weekday): Week {
+  // We know we'll get a list of 7 weekdays out of this, but flow does not support a type for a tuple with a 
+  // generic amount of parameters, so we can't type arrayRotate as [genericNumberOfParams] => [genericNumberOfParams].
+  // As such, we're helping flow out by telling it we know we have a 'Week' to return, here.
+  return ((arrayRotate([...localizedWeekdayNames(locale)], firstWeekDay): any): Week);
 }
 
 export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarWeekday: Weekday): number {
-  const indexOfFirstCalendarWeekday = weekdays.indexOf(firstCalendarWeekday);
+  // const indexOfFirstCalendarWeekday = weekdays.indexOf(firstCalendarWeekday);
   const indexOfFirstWeekdayOfMonth = firstDayOfTheMonth.getDay(); // getDay is indexed Sun = 0, Sat = 6.
-  if (indexOfFirstCalendarWeekday === undefined || indexOfFirstWeekdayOfMonth === undefined) {
+  if (firstCalendarWeekday === undefined || indexOfFirstWeekdayOfMonth === undefined) {
     throw new Error("Invalid state. We need both a first day of the month and first calendar weekday index.");
   }
-  if (indexOfFirstWeekdayOfMonth >= indexOfFirstCalendarWeekday) {
-    return 7 - indexOfFirstWeekdayOfMonth + indexOfFirstCalendarWeekday;
+  if (indexOfFirstWeekdayOfMonth >= firstCalendarWeekday) {
+    return 7 - indexOfFirstWeekdayOfMonth + firstCalendarWeekday;
   }
-  return indexOfFirstCalendarWeekday - indexOfFirstWeekdayOfMonth;
+  return firstCalendarWeekday - indexOfFirstWeekdayOfMonth;
 }
 
 // Sun = 0, Sat = 6.
