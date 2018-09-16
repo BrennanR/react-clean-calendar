@@ -59,8 +59,6 @@ export class Example2 extends Component<Props, State> {
         renderDay={this.renderDay}
         renderHeading={this.renderHeading}
         borderOptions={{ width: 2, color: "lightgrey" }}
-        onNextMonthClicked={(year, month) => this.setState({ year, month })}
-        onPreviousMonthClicked={(year, month) => this.setState({ year, month })}
       />
     );
   }

@@ -37,8 +37,6 @@ export class Example3 extends Component<Props, State> {
         month={this.state.month}
         renderDay={this.renderDay}
         borderOptions="no-border"
-        onNextMonthClicked={(year, month) => this.setState({ year, month })}
-        onPreviousMonthClicked={(year, month) => this.setState({ year, month })}
       />
     );
   }

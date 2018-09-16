@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Example1 } from "./examples/Example1";
 import { Example2 } from "./examples/Example2";
 import { Example3 } from "./examples/Example3";
+import { Example4 } from "./examples/Example4";
 import './App.css';
 
 type State = {
@@ -15,6 +16,7 @@ const EXAMPLES = {
   Example1,
   Example2,
   Example3,
+  Example4,
 };
 
 class App extends Component<{}, State> {
@@ -30,7 +32,7 @@ class App extends Component<{}, State> {
 
   render() {
     return (
-      <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "100%", }}>
+      <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "100%" }}>
         <div
           style={{ 
             display: "flex", 
@@ -62,7 +64,7 @@ class App extends Component<{}, State> {
           }
         </form>
         </div>
-        <div style={{ display: "flex", width: "100%", height: "100%", }} className="App">
+        <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center" }} className="App">
           {
             this.renderExample(EXAMPLES[this.state.selectedExample])
           }
