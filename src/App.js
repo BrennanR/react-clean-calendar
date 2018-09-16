@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 
 import { Example1 } from "./examples/Example1";
 import { Example2 } from "./examples/Example2";
+import { Example3 } from "./examples/Example3";
 import './App.css';
 
 type State = {
@@ -13,6 +14,7 @@ type State = {
 const EXAMPLES = {
   Example1,
   Example2,
+  Example3,
 };
 
 class App extends Component<{}, State> {
@@ -44,15 +46,17 @@ class App extends Component<{}, State> {
         <form style={{ display: "flex", flexDirection: "column" }}>
           {
             Object.keys(EXAMPLES).map(key => (
-              <div style={{ display: "flex", flexDirection: "row" }} key={key}>
-                <input
-                  type="radio"
-                  name={key}
-                  value={key}
-                  checked={key === this.state.selectedExample}
-                  onClick={() => this.setState({ selectedExample: key })}
-                />
-                <label>{key}</label>
+              <div style={{ display: "flex", flexDirection: "column" }} key={key}>
+                <label style={{ display: "flex", flexDirection: "row" }}>
+                  <input
+                    type="radio"
+                    name={key}
+                    value={key}
+                    checked={key === this.state.selectedExample}
+                    onClick={() => this.setState({ selectedExample: key })}
+                  />
+                  {key}
+                </label>
               </div>
             ))
           }

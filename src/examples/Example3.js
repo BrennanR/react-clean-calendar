@@ -12,7 +12,7 @@ type State = {
 type Props = {};
 
 /** This example shows a calendar rendered in English with paging implemented via the component's state. */
-export class Example2 extends Component<Props, State> {
+export class Example3 extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const date = new Date();
@@ -32,11 +32,11 @@ export class Example2 extends Component<Props, State> {
   render() {
     return (
       <Calendar
-        locale="fr-ca"
+        locale="en-ca"
         year={this.state.year}
         month={this.state.month}
         renderDay={this.renderDay}
-        borderOptions={{ width: 2, color: "lightgrey" }}
+        borderOptions="no-border"
         onNextMonthClicked={(year, month) => this.setState({ year, month })}
         onPreviousMonthClicked={(year, month) => this.setState({ year, month })}
       />

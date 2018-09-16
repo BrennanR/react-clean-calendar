@@ -32,7 +32,13 @@ const dateOfCalendarWeekAndWeekdayIndex = (year: number, month: number, dayOffse
 }
 
 const borderStyle = (dayIndex: number, weekIndex: number, lastWeekIndex: number, borderOptions: BorderOptions) => {
-  const { width: borderWidth, color: borderColor } = borderOptions;
+  let borderWidth, borderColor;
+  if (borderOptions === "no-border") {
+    borderWidth = 0;
+    borderColor = "black";
+  } else {
+    ({ width: borderWidth, color: borderColor } = borderOptions);
+  }
   const borderTop = borderWidth;
   const borderLeft = borderWidth;
   const borderRight = dayIndex === 6 ? borderWidth : 0;
@@ -82,7 +88,7 @@ export const Month = (props: MonthProps) => {
                       weekdayIndex,
                       weekOfMonthIndex, 
                       weekPerMonthRange.length - 1, 
-                      props.borderOptions || defaultBorderOptions
+                      props.borderOptions || defaultBorderOptions,
                     )
                   }}
                   key={weekdayIndex} 
