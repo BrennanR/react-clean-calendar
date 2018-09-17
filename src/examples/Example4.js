@@ -1,9 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Node } from 'react';
 
 import { Calendar } from '../calendar/Calendar';
-import { longMonthName, nextMonth } from '../calendar/util/date';
+import { nextMonth } from '../calendar/util/date';
+import { localizedWeekdayNames, localizedYearMonth } from '../calendar/util/localizeDate';
 
 
 type State = {
@@ -16,6 +18,7 @@ type Props = {};
 /** This example shows a calendar rendered in English with paging implemented via the component's state. */
 export class Example4 extends Component<Props, State> {
   locale = "en-ca";
+  localizedWeekdayNames = localizedWeekdayNames(this.locale, "narrow");
 
   constructor(props: Props) {
     super(props);
@@ -33,20 +36,35 @@ export class Example4 extends Component<Props, State> {
     );
   }
 
-  renderHeader = (year: number, month: number) => {
-    return <div>{longMonthName(this.locale, year, month)}</div>
-  }
+  renderHeading = (year: number, month: number): Node => (
+    <div style={{ fontSize: 22 }}>{localizedYearMonth(this.locale, "long", "numeric", year, month)}</div>
+  );
+
+  renderDayHeading = (dayIndex: number): Node => (
+    <div>{this.localizedWeekdayNames[dayIndex]}</div>
+  );
 
   render() {
     const { year: secondMonthYear, month: secondMonth } = nextMonth(this.state.year, this.state.month)
     return (
-      <div style={{ display: "flex", flexDirection: "row", height: 500, paddingTop: 40 }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          flex: 1,
+          height: 500,
+          paddingTop: 40,
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}
+      >
         <Calendar
           locale={this.locale}
           year={this.state.year}
           month={this.state.month}
           renderDay={this.renderDay}
-          renderHeading={() => this.renderHeader(this.state.year, this.state.month)}
+          renderDayHeading={this.renderDayHeading}
+          renderHeading={() => this.renderHeading(this.state.year, this.state.month)}
         />
         <div style={{ width: 20 }} />
         <Calendar
@@ -54,7 +72,8 @@ export class Example4 extends Component<Props, State> {
           year={secondMonthYear}
           month={secondMonth}
           renderDay={this.renderDay}
-          renderHeading={() => this.renderHeader(secondMonthYear, secondMonth)}
+          renderDayHeading={this.renderDayHeading}
+          renderHeading={() => this.renderHeading(secondMonthYear, secondMonth)}
         />
       </div>
     );

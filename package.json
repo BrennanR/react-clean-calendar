@@ -1,6 +1,7 @@
 {
   "name": "simple-calendar",
   "version": "0.1.0",
+  "author": "Brennan Rauert <brennanrauert@gmail.com>",
   "private": true,
   "dependencies": {
     "react": "^16.4.2",

@@ -1,10 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Node } from 'react';
 
 import { Calendar } from '../calendar/Calendar';
 import { DefaultHeading } from '../calendar/components/defaults/DefaultHeading';
-import { longMonthName, nextMonth, previousMonth } from '../calendar/util/date';
+import { nextMonth, previousMonth } from '../calendar/util/date';
+import { localizedWeekdayNames, localizedYearMonth } from '../calendar/util/localizeDate';
 
 type State = {
   year: number,
@@ -16,6 +18,7 @@ type Props = {};
 /** This example shows a calendar rendered in English with paging implemented via the component's state. */
 export class Example2 extends Component<Props, State> {
   locale = "fr-ca";
+  localizedWeekdayNames = localizedWeekdayNames(this.locale, "short");
 
   constructor(props: Props) {
     super(props);
@@ -26,7 +29,7 @@ export class Example2 extends Component<Props, State> {
   renderHeading = () => {
     return (
       <DefaultHeading
-        title={longMonthName(this.locale, this.state.year, this.state.month)}
+        title={localizedYearMonth(this.locale, "long", "numeric", this.state.year, this.state.month)}
         onNextMonthClicked={() => {
           const { year, month } = nextMonth(this.state.year, this.state.month);
           this.setState({ year, month });
@@ -39,6 +42,9 @@ export class Example2 extends Component<Props, State> {
     );
   };
 
+  renderDayHeading = (dayIndex: number): Node => (
+    <div>{this.localizedWeekdayNames[dayIndex]}</div>
+  );
 
   renderDay = (date: Date) => {
     return (
@@ -57,6 +63,7 @@ export class Example2 extends Component<Props, State> {
         year={this.state.year}
         month={this.state.month}
         renderDay={this.renderDay}
+        renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
         borderOptions={{ width: 2, color: "lightgrey" }}
       />

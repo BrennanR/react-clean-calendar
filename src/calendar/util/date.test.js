@@ -1,6 +1,6 @@
 // @flow
 
-import { calendarWeeksInMonth, localizedWeekdayNames, weekOrderedByGivenFirstWeekday } from "./date";
+import { calendarWeeksInMonth } from "./date";
 
 describe('calendarWeeksInMonth', () => {
   it('calculates the number of weeks correctly with Sunday start of week', () => {
@@ -21,55 +21,5 @@ describe('calendarWeeksInMonth', () => {
     )
     // Validated the snapshot results online against timeanddate.com. Weeks/month match.
     expect(result).toMatchSnapshot();
-  });
-});
-
-describe('weekOrderedByGivenFirstWeekday', () => {
-  it('orders correctly with Sunday first', () => {
-    expect(weekOrderedByGivenFirstWeekday('en-us', 0)).toEqual([
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]);
-  });
-  it('orders correctly with Monday first', () => {
-    expect(weekOrderedByGivenFirstWeekday('en-us', 1)).toEqual([
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ]);
-  });
-  it ('orders correctly with Thursday first', () => {
-    expect(weekOrderedByGivenFirstWeekday('en-us', 4)).toEqual([
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-    ]);
-  });
-});
-
-describe('localizedWeekdayNames', () => {
-  it('works for long weekday descriptions in English', () => {
-      expect(localizedWeekdayNames('en-us')).toEqual([
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]);
   });
 });

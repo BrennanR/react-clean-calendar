@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Node } from 'react';
 
 import { Calendar } from '../calendar/Calendar';
 
@@ -19,7 +20,7 @@ export class Example3 extends Component<Props, State> {
     this.state = { year: date.getFullYear(), month: date.getMonth() + 1};
   }
 
-  renderDay = (date: Date) => {
+  renderDay = (date: Date): Node => {
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart` }} className="calendar-day">
         <div style={{ display: 'flex', flex: 1, margin: 5 }}>

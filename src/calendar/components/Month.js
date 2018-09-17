@@ -3,21 +3,29 @@
 import React from 'react';
 import type { Node } from 'react';
 
-import { calendarWeeksInMonth, firstWeekdayInMonth, weekOrderedByGivenFirstWeekday } from "../util/date";
+import { arrayRotate } from "../util/array";
+import { calendarWeeksInMonth, firstWeekdayInMonth } from "../util/date";
 import "./Month.css";
 import type { BorderOptions, Weekday } from "../types";
 
-
-type MonthProps = {
+type MonthProps = {|
   locale: string,
   year: number,
+  firstWeekday?: Weekday,
   month: number,
   renderDay: (date: Date, cellID: string) => Node,
-  onDayPress?: (date: Date, cellID: string) => void,
+  renderDayHeading: ?(dayIndex: number) => Node,
+  onDayPress: ?(date: Date, cellID: string) => void,
   borderOptions?: BorderOptions,
+|};
+
+type WeekdayHeadingsProps = {
+  locale: string,
+  firstWeekday: Weekday,
+  renderDayHeading: (dayIndex: number) => Node,
 };
 
-const daysPerWeek = 7;
+const dayPerWeekRange = [0, 1, 2, 3, 4, 5, 6];
 const defaultBorderOptions: BorderOptions = {
   width: 1,
   color: "black",
@@ -53,12 +61,16 @@ const borderStyle = (dayIndex: number, weekIndex: number, lastWeekIndex: number,
   }
 }
 
-const Header = (props: { locale: string, firstWeekday: Weekday }) => {
+const WeekdayHeadings = (props: WeekdayHeadingsProps) => {
   return (
     <div className="Month-week-header">
-      {weekOrderedByGivenFirstWeekday(props.locale, props.firstWeekday).map(weekdayName =>
-        <div className="Month-week-header-weekday" key={weekdayName}>{weekdayName}</div>
-      )}
+      {
+        arrayRotate(dayPerWeekRange, props.firstWeekday).map(dayIndex => (
+          <div className="Month-week-header-weekday" key={dayIndex}>
+            {props.renderDayHeading && props.renderDayHeading(parseInt(dayIndex, 10))}
+          </div>
+        ))
+      }
     </div>
   );
 }
@@ -66,10 +78,13 @@ const Header = (props: { locale: string, firstWeekday: Weekday }) => {
 export const Month = (props: MonthProps) => {
   const weekdayOfTheFirst = firstWeekdayInMonth(props.year, props.month);
   const weekPerMonthRange = [...Array(calendarWeeksInMonth(props.year, props.month, 0)).keys()];
-  const dayPerWeekRange = [...Array(daysPerWeek).keys()];
   return (
     <div className="Month-month">
-      <Header firstWeekday={0} locale={props.locale} />
+      {
+        props.renderDayHeading && (
+          <WeekdayHeadings firstWeekday={0} locale={props.locale} renderDayHeading={props.renderDayHeading} />
+        )
+      }
       {
         weekPerMonthRange.map(weekOfMonthIndex => (
           <div key={weekOfMonthIndex} className="Month-week">
