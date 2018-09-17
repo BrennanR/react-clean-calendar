@@ -6,6 +6,7 @@ import { Example1 } from "./examples/Example1";
 import { Example2 } from "./examples/Example2";
 import { Example3 } from "./examples/Example3";
 import { Example4 } from "./examples/Example4";
+import { Example5 } from "./examples/Example5";
 import './App.css';
 
 type State = {
@@ -17,6 +18,7 @@ const EXAMPLES = {
   Example2,
   Example3,
   Example4,
+  Example5,
 };
 
 class App extends Component<{}, State> {
