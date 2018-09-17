@@ -1,10 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Element } from 'react';
 
 import { Calendar } from '../calendar/Calendar';
 import { DefaultHeading } from '../calendar/components/defaults/DefaultHeading';
-import { longMonthName, nextMonth, previousMonth } from '../calendar/util/date';
+import { nextMonth, previousMonth } from '../calendar/util/date';
+import { localizedWeekdayNames, localizedYearMonth } from '../calendar/util/localizeDate';
 
 type State = {
   year: number,
@@ -19,6 +21,7 @@ type Props = {};
  */
 export class Example1 extends Component<Props, State> {
   locale = "en-us";
+  localizedWeekdayNames = localizedWeekdayNames(this.locale, "long");
 
   constructor(props: Props) {
     super(props);
@@ -51,7 +54,17 @@ export class Example1 extends Component<Props, State> {
     }
     const backgroundColor = this.state.selectedCellIDs.indexOf(cellID) !== -1 ? `yellow` : `white`;
     return (
-      <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart`, backgroundColor }} className="calendar-day">
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          justifyContent: "flexStart",
+          cursor: "pointer",
+          userSelect: "none",
+          backgroundColor 
+        }} 
+        className="calendar-day"
+      >
         <div style={{ display: 'flex', flex: 1, margin: 5, color, fontWeight }}>
           {dayText}
         </div>
@@ -59,10 +72,14 @@ export class Example1 extends Component<Props, State> {
     );
   }
 
+  renderDayHeading = (dayIndex: number): Element<*> => (
+    <div>{this.localizedWeekdayNames[dayIndex]}</div>
+  );
+
   renderHeading = () => {
     return (
       <DefaultHeading
-        title={longMonthName(this.locale, this.state.year, this.state.month)}
+        title={localizedYearMonth(this.locale, "long", "numeric", this.state.year, this.state.month)}
         onNextMonthClicked={() => {
           const { year, month } = nextMonth(this.state.year, this.state.month);
           this.setState({ year, month });
@@ -82,6 +99,7 @@ export class Example1 extends Component<Props, State> {
         year={this.state.year}
         month={this.state.month}
         renderDay={(date, cellID) => this.renderDay(date, cellID, this.state.year, this.state.month)}
+        renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
         borderOptions={{ width: 1, color: "black" }}
         onDayPress={this.onDayPress}
