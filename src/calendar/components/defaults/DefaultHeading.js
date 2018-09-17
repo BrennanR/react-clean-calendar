@@ -2,13 +2,13 @@
 
 import React from 'react';
 
-type PagerProps = {
+type DefaultHeadingProps = {
   title: string,
   onNextMonthClicked: () => void,
   onPreviousMonthClicked: () => void,
 };
 
-export const Pager = (props: PagerProps) => {
+export const DefaultHeading = (props: DefaultHeadingProps) => {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', marginTop: 5, marginBottom: 5 }}>
       <button onClick={props.onPreviousMonthClicked}>{"<<<"}</button>
