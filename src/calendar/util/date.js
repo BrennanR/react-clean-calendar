@@ -1,17 +1,6 @@
 // @flow
 
 import type { Weekday } from '../types';
-
-// These are indexed the same as Date.prototype.getDay() indexes the days of the week.
-// const weekdays = [
-//   "Sunday",
-//   "Monday",
-//   "Tuesday",
-//   "Wednesday",
-//   "Thursday",
-//   "Friday",
-//   "Saturday",
-// ];
 type Week = [string, string, string, string, string, string, string];
 
 // Adapted from: https://stackoverflow.com/a/33451102/932896
@@ -37,8 +26,10 @@ function daysBetween(startDate: Date, endDate: Date): number {
 }
 
 export function localizedWeekdayNames(locale: string): Week {
-  // January 4th, 1970, 00:00:00. The first Sunday after the epoch.
+  // January 4th, 1970, 00:00:00. The first Sunday after the epoch. We can use any arbitrary Sunday, here, but we do 
+  // need concrete dates in order to get localized weekday names, using only native Javascript.
   const sunday = new Date(259200000);
+  // We (mostly) trust ourselves, so we type-cast the result of this to 'Week'.
   return ((Array(7).fill().map((_, i) => {
     const date = new Date(sunday.valueOf());
     date.setDate(date.getDate() + i);
@@ -47,7 +38,7 @@ export function localizedWeekdayNames(locale: string): Week {
 }
 
 /**
- * firstWeekDay The first week day based on Javascript's native getDay() method where Sun = 0 ... Sat = 6. eg. If you
+ * firstWeekDay - The first week day based on Javascript's native getDay() method where Sun = 0 ... Sat = 6. eg. If you
  *    want to indicate Mon, supply the value '1'.
  */
 export function weekOrderedByGivenFirstWeekday(locale: string, firstWeekDay: Weekday): Week {
