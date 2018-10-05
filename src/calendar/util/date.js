@@ -4,9 +4,9 @@ import type { Weekday } from '../types';
 
 // https://stackoverflow.com/a/11252167/932896
 function treatAsUTC(date: Date): Date {
-    const result = new Date(date);
-    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-    return result;
+  const result = new Date(date);
+  result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+  return result;
 }
 
 /** This function calculates the days between two dates, treating one day as 24 hours and each of the input dates
@@ -21,7 +21,7 @@ function daysBetween(startDate: Date, endDate: Date): number {
 export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarWeekday: Weekday): number {
   const indexOfFirstWeekdayOfMonth = firstDayOfTheMonth.getDay(); // getDay is indexed Sun = 0, Sat = 6.
   if (firstCalendarWeekday === undefined || indexOfFirstWeekdayOfMonth === undefined) {
-    throw new Error("Invalid state. We need both a first day of the month and first calendar weekday index.");
+    throw new Error('Invalid state. We need both a first day of the month and first calendar weekday index.');
   }
   if (indexOfFirstWeekdayOfMonth >= firstCalendarWeekday) {
     return 7 - indexOfFirstWeekdayOfMonth + firstCalendarWeekday;
@@ -31,13 +31,13 @@ export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarW
 
 // Sun = 0, Sat = 6.
 export function firstWeekdayInMonth(year: number, month: number): number {
-  return new Date(year, month-1, 1).getDay();
+  return new Date(year, month - 1, 1).getDay();
 }
 
 export function calendarWeeksInMonth(year: number, month: number, firstCalendarWeekday: Weekday): number {
   // The incoming month is 1 indexed. Convert it to 0 indexed.
-  const firstDayOfMonth = new Date(year, month-1, 1);
-  const lastDayOfPreviousMonth = new Date(year, month-1, 0);
+  const firstDayOfMonth = new Date(year, month - 1, 1);
+  const lastDayOfPreviousMonth = new Date(year, month - 1, 0);
   // 0 for day gives us the last day of the month. Using month directly gives us the next month due to 1-to-0 indexing.
   const lastDayOfMonth = new Date(year, month, 0);
   // This function uses midnight on the input dates to do its calculation. To get the total days in the month, we need
@@ -60,7 +60,7 @@ export function nextMonth(year: number, month: number) {
 
 export function previousMonth(year: number, month: number) {
   if (month === 1) {
-    return {year: year - 1, month: 12};
+    return { year: year - 1, month: 12 };
   }
-  return {year, month: month - 1};
+  return { year, month: month - 1 };
 }

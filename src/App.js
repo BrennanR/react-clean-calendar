@@ -2,16 +2,16 @@
 
 import React, { Component } from 'react';
 
-import { Example1 } from "./examples/Example1";
-import { Example2 } from "./examples/Example2";
-import { Example3 } from "./examples/Example3";
-import { Example4 } from "./examples/Example4";
-import { Example5 } from "./examples/Example5";
+import { Example1 } from './examples/Example1';
+import { Example2 } from './examples/Example2';
+import { Example3 } from './examples/Example3';
+import { Example4 } from './examples/Example4';
+import { Example5 } from './examples/Example5';
 import './App.css';
 
 type State = {
   selectedExample: string,
-}
+};
 
 const EXAMPLES = {
   Example1,
@@ -34,24 +34,23 @@ class App extends Component<{}, State> {
 
   render() {
     return (
-      <div style={{ display: "flex", flexDirection: "row", width: "100%", height: "100%" }}>
+      <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
         <div
-          style={{ 
-            display: "flex", 
-            flexDirection: "column", 
-            borderStyle: "solid",
-            borderColor: "black",
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            borderStyle: 'solid',
+            borderColor: 'black',
             borderWidth: 0,
             borderRightWidth: 2,
             padding: 10,
             paddingRight: 20,
           }}
         >
-        <form style={{ display: "flex", flexDirection: "column" }}>
-          {
-            Object.keys(EXAMPLES).map(key => (
-              <div style={{ display: "flex", flexDirection: "column" }} key={key}>
-                <label style={{ display: "flex", flexDirection: "row" }}>
+          <form style={{ display: 'flex', flexDirection: 'column' }}>
+            {Object.keys(EXAMPLES).map(key => (
+              <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
+                <label style={{ display: 'flex', flexDirection: 'row' }}>
                   <input
                     type="radio"
                     name={key}
@@ -62,14 +61,11 @@ class App extends Component<{}, State> {
                   {key}
                 </label>
               </div>
-            ))
-          }
-        </form>
+            ))}
+          </form>
         </div>
-        <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center" }} className="App">
-          {
-            this.renderExample(EXAMPLES[this.state.selectedExample])
-          }
+        <div style={{ display: 'flex', width: '100%', height: '100%', justifyContent: 'center' }} className="App">
+          {this.renderExample(EXAMPLES[this.state.selectedExample])}
         </div>
       </div>
     );

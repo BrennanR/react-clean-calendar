@@ -4,6 +4,8 @@
   "author": "Brennan Rauert <brennanrauert@gmail.com>",
   "private": true,
   "dependencies": {
+    "eslint-config-prettier": "3.1.0",
+    "eslint-plugin-prettier": "3.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.5"
@@ -16,10 +18,12 @@
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
-    "eslint": "^5.5.0",
+    "eslint": "5.6.1",
     "eslint-config-problems": "^1.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "^0.80.0"
+    "flow-bin": "^0.80.0",
+    "prettier": "1.14.3"
   }
 }

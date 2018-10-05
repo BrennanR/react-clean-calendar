@@ -16,8 +16,8 @@ type State = {
 type Props = {};
 
 export class Example5 extends Component<Props, State> {
-  locale = "en-ca";
-  localizedWeekdayNames = localizedWeekdayNames(this.locale, "short");
+  locale = 'en-ca';
+  localizedWeekdayNames = localizedWeekdayNames(this.locale, 'short');
 
   constructor(props: Props) {
     super(props);
@@ -28,7 +28,7 @@ export class Example5 extends Component<Props, State> {
   renderHeading = () => {
     return (
       <DefaultHeading
-        title={localizedYearMonth(this.locale, "long", "numeric", this.state.year, this.state.month)}
+        title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
         onNextMonthClicked={() => {
           const { year, month } = nextMonth(this.state.year, this.state.month);
           this.setState({ year, month });
@@ -41,19 +41,15 @@ export class Example5 extends Component<Props, State> {
     );
   };
 
-  renderDayHeading = (dayIndex: number): Node => (
-    <div>{this.localizedWeekdayNames[dayIndex]}</div>
-  );
+  renderDayHeading = (dayIndex: number): Node => <div>{this.localizedWeekdayNames[dayIndex]}</div>;
 
   renderDay = (date: Date) => {
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart` }} className="calendar-day">
-        <div style={{ display: 'flex', flex: 1, margin: 5 }}>
-          {date.getDate()}
-        </div>
+        <div style={{ display: 'flex', flex: 1, margin: 5 }}>{date.getDate()}</div>
       </div>
     );
-  }
+  };
 
   render() {
     return (
@@ -65,7 +61,7 @@ export class Example5 extends Component<Props, State> {
         renderDay={this.renderDay}
         renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
-        borderOptions={{ width: 2, color: "lightgrey" }}
+        borderOptions={{ width: 2, color: 'lightgrey' }}
       />
     );
   }

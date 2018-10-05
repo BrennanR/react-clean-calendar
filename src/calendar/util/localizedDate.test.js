@@ -1,6 +1,6 @@
 // @flow
 
-import { localizedWeekdayNames, localizedWeekdayNamesStartingWith } from "./localizeDate";
+import { localizedWeekdayNames, localizedWeekdayNamesStartingWith } from './localizeDate';
 
 describe('localizedWeekdayNames', () => {
   it('works for long weekday descriptions in English', () => {
@@ -15,7 +15,6 @@ describe('localizedWeekdayNames', () => {
     ]);
   });
 });
-
 
 describe('localizedWeekdayNamesStartingWith', () => {
   it('orders correctly with Sunday first', () => {
@@ -40,7 +39,7 @@ describe('localizedWeekdayNamesStartingWith', () => {
       'Sunday',
     ]);
   });
-  it ('orders correctly with Thursday first', () => {
+  it('orders correctly with Thursday first', () => {
     expect(localizedWeekdayNamesStartingWith('en-us', 'long', 4)).toEqual([
       'Thursday',
       'Friday',
