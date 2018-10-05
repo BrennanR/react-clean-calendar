@@ -16,7 +16,7 @@ type CalendarProps = {|
   renderHeading?: () => Node,
   borderOptions?: BorderOptions,
   // Since you can render the day as you please, onDayPress is a convenience method. You can implement your own 
-  // onPress logic within you renderDay method, if you'd prefer.
+  // onPress logic within your renderDay method, if you'd prefer.
   onDayPress?: (date: Date, cellID: string) => void,
 |};
 

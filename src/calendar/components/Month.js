@@ -56,7 +56,7 @@ const borderStyle = (
   const borderTop = borderWidth;
   const borderLeft = borderWidth;
   const borderRight = dayIndex === lastDayIndex ? borderWidth : 0;
-  const borderBottom = weekIndex === lastWeekIndex ? borderWidth : 0
+  const borderBottom = weekIndex === lastWeekIndex ? borderWidth : 0;
   return {
     borderTop,
     borderRight,

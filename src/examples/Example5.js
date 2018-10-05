@@ -15,8 +15,6 @@ type State = {
 
 type Props = {};
 
-/** This example demonstrates Monday as the start of the week. */
-// TODO: Make this demo demonstrate Monday as the start of the week.
 export class Example5 extends Component<Props, State> {
   locale = "en-ca";
   localizedWeekdayNames = localizedWeekdayNames(this.locale, "short");
@@ -24,7 +22,7 @@ export class Example5 extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const date = new Date();
-    this.state = { year: date.getFullYear(), month: date.getMonth() + 1};
+    this.state = { year: date.getFullYear(), month: date.getMonth() + 1 };
   }
 
   renderHeading = () => {
@@ -63,7 +61,7 @@ export class Example5 extends Component<Props, State> {
         year={this.state.year}
         month={this.state.month}
         locale={this.locale}
-        firstWeekday={1}
+        firstWeekday={1} // 1 = Monday
         renderDay={this.renderDay}
         renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
