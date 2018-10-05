@@ -19,7 +19,6 @@ function daysBetween(startDate: Date, endDate: Date): number {
 }
 
 export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarWeekday: Weekday): number {
-  // const indexOfFirstCalendarWeekday = weekdays.indexOf(firstCalendarWeekday);
   const indexOfFirstWeekdayOfMonth = firstDayOfTheMonth.getDay(); // getDay is indexed Sun = 0, Sat = 6.
   if (firstCalendarWeekday === undefined || indexOfFirstWeekdayOfMonth === undefined) {
     throw new Error("Invalid state. We need both a first day of the month and first calendar weekday index.");
@@ -54,9 +53,9 @@ export function calendarWeeksInMonth(year: number, month: number, firstCalendarW
 
 export function nextMonth(year: number, month: number) {
   if (month === 12) {
-    return {year: year + 1, month: 1};
+    return { year: year + 1, month: 1 };
   }
-  return {year, month: month + 1};
+  return { year, month: month + 1 };
 }
 
 export function previousMonth(year: number, month: number) {
