@@ -60,9 +60,10 @@ export class Example5 extends Component<Props, State> {
   render() {
     return (
       <Calendar
-        locale={this.locale}
         year={this.state.year}
         month={this.state.month}
+        locale={this.locale}
+        firstWeekday={1}
         renderDay={this.renderDay}
         renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
