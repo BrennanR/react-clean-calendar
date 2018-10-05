@@ -3,10 +3,10 @@
 import React from 'react';
 import type { Node } from 'react';
 
-import { arrayRotate } from "../util/array";
-import { calendarWeeksInMonth, firstWeekdayInMonth } from "../util/date";
-import "./Month.css";
-import type { BorderOptions, Weekday } from "../types";
+import { arrayRotate } from '../util/array';
+import { calendarWeeksInMonth, firstWeekdayInMonth } from '../util/date';
+import './Month.css';
+import type { BorderOptions, Weekday } from '../types';
 
 type MonthProps = {|
   year: number,
@@ -28,28 +28,28 @@ type WeekdayHeadingsProps = {
 const dayPerWeekRange = (firstWeekday: Weekday) => arrayRotate([0, 1, 2, 3, 4, 5, 6], firstWeekday);
 const defaultBorderOptions: BorderOptions = {
   width: 1,
-  color: "black",
+  color: 'black',
 };
 
 const dayOfMonth = (weekOfMonthIndex: number, weekdayIndex: number, weekdayOfTheFirst: number) => {
-  return (weekOfMonthIndex * 7) + weekdayIndex - weekdayOfTheFirst + 1;
-}
+  return weekOfMonthIndex * 7 + weekdayIndex - weekdayOfTheFirst + 1;
+};
 
 const dateOfCalendarWeekAndWeekdayIndex = (year: number, month: number, dayOffset: number) => {
-  return new Date(year, month-1, dayOffset);
-}
+  return new Date(year, month - 1, dayOffset);
+};
 
 const borderStyle = (
   dayIndex: number,
   weekIndex: number,
   lastDayIndex: number,
   lastWeekIndex: number,
-  borderOptions: BorderOptions
+  borderOptions: BorderOptions,
 ) => {
   let borderWidth, borderColor;
-  if (borderOptions === "no-border") {
+  if (borderOptions === 'no-border') {
     borderWidth = 0;
-    borderColor = "black";
+    borderColor = 'black';
   } else {
     ({ width: borderWidth, color: borderColor } = borderOptions);
   }
@@ -63,25 +63,23 @@ const borderStyle = (
     borderBottom,
     borderLeft,
     borderColor,
-    borderStyle: "solid",
-  }
-}
+    borderStyle: 'solid',
+  };
+};
 
 const WeekdayHeadings = (props: WeekdayHeadingsProps) => {
   return (
     <div className="Month-week-header">
-      {
-        props.weekdays.map(dayIndex => {
-          return (
-            <div className="Month-week-header-weekday" key={dayIndex}>
-              {props.renderDayHeading && props.renderDayHeading(parseInt(dayIndex, 10))}
-            </div>
-          )
-        })
-      }
+      {props.weekdays.map(dayIndex => {
+        return (
+          <div className="Month-week-header-weekday" key={dayIndex}>
+            {props.renderDayHeading && props.renderDayHeading(parseInt(dayIndex, 10))}
+          </div>
+        );
+      })}
     </div>
   );
-}
+};
 
 export const Month = (props: MonthProps) => {
   const { year, month, locale, firstWeekday, borderOptions } = props;
@@ -90,49 +88,39 @@ export const Month = (props: MonthProps) => {
   const orderedDaysPerWeek = dayPerWeekRange(props.firstWeekday);
   return (
     <div className="Month-month">
-      {
-        props.renderDayHeading && (
-          <WeekdayHeadings 
-            weekdays={orderedDaysPerWeek}
-            locale={locale}
-            renderDayHeading={props.renderDayHeading}
-          />
-        )
-      }
-      {
-        weekPerMonthRange.map(weekOfMonthIndex => (
-          <div key={weekOfMonthIndex} className="Month-week">
-          {
-            orderedDaysPerWeek.map(weekdayIndex => {
-              const cellDate = dateOfCalendarWeekAndWeekdayIndex(
-                year,
-                month,
-                dayOfMonth(weekOfMonthIndex, weekdayIndex, weekdayOfTheFirst)
-              );
-              const cellID = `${weekOfMonthIndex}-${weekdayIndex}`;
-              return (
-                <div 
-                  style={{ 
-                    ...borderStyle(
-                      weekdayIndex,
-                      weekOfMonthIndex,
-                      orderedDaysPerWeek[orderedDaysPerWeek.length - 1],
-                      weekPerMonthRange.length - 1,
-                      borderOptions || defaultBorderOptions,
-                    )
-                  }}
-                  key={weekdayIndex} 
-                  className={`Month-day Month-day-${cellID}`}
-                  onClick={() => props.onDayPress != null && props.onDayPress(cellDate, cellID)}
-                >
-                  {props.renderDay(cellDate, cellID)}
-                </div>
-              );
-            })
-          }
-          </div>
-        ))
-      }
+      {props.renderDayHeading && (
+        <WeekdayHeadings weekdays={orderedDaysPerWeek} locale={locale} renderDayHeading={props.renderDayHeading} />
+      )}
+      {weekPerMonthRange.map(weekOfMonthIndex => (
+        <div key={weekOfMonthIndex} className="Month-week">
+          {orderedDaysPerWeek.map(weekdayIndex => {
+            const cellDate = dateOfCalendarWeekAndWeekdayIndex(
+              year,
+              month,
+              dayOfMonth(weekOfMonthIndex, weekdayIndex, weekdayOfTheFirst),
+            );
+            const cellID = `${weekOfMonthIndex}-${weekdayIndex}`;
+            return (
+              <div
+                style={{
+                  ...borderStyle(
+                    weekdayIndex,
+                    weekOfMonthIndex,
+                    orderedDaysPerWeek[orderedDaysPerWeek.length - 1],
+                    weekPerMonthRange.length - 1,
+                    borderOptions || defaultBorderOptions,
+                  ),
+                }}
+                key={weekdayIndex}
+                className={`Month-day Month-day-${cellID}`}
+                onClick={() => props.onDayPress != null && props.onDayPress(cellDate, cellID)}
+              >
+                {props.renderDay(cellDate, cellID)}
+              </div>
+            );
+          })}
+        </div>
+      ))}
     </div>
   );
 };

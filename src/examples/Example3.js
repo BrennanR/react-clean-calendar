@@ -17,18 +17,16 @@ export class Example3 extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const date = new Date();
-    this.state = { year: date.getFullYear(), month: date.getMonth() + 1};
+    this.state = { year: date.getFullYear(), month: date.getMonth() + 1 };
   }
 
   renderDay = (date: Date): Node => {
     return (
       <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart` }} className="calendar-day">
-        <div style={{ display: 'flex', flex: 1, margin: 5 }}>
-          {date.getDate()}
-        </div>
+        <div style={{ display: 'flex', flex: 1, margin: 5 }}>{date.getDate()}</div>
       </div>
     );
-  }
+  };
 
   render() {
     return (
