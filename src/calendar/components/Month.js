@@ -3,13 +3,7 @@
 import React from 'react';
 import type { Node } from 'react';
 
-import { arrayRotate } from '../util/array';
-import {
-  adjustedDayOffsetBasedOnFirstCalendarWeekday,
-  calendarWeeksInMonth,
-  firstWeekdayInMonth,
-  offsetFromWeekAndDay,
-} from '../util/date';
+import { dayPerWeekRange, monthDayOffsetsByWeekForYearMonth } from '../util/date';
 import './Month.css';
 import type { BorderOptions, Weekday } from '../types';
 
@@ -30,7 +24,6 @@ type WeekdayHeadingsProps = {
   renderDayHeading: (dayIndex: number) => Node,
 };
 
-const dayPerWeekRange = (firstWeekday: Weekday) => arrayRotate([0, 1, 2, 3, 4, 5, 6], firstWeekday);
 const defaultBorderOptions: BorderOptions = {
   width: 1,
   color: 'black',
@@ -62,22 +55,6 @@ const borderStyle = (dayIndex: number, weekValue: number, lastWeekValue: number,
   };
 };
 
-const monthDayOffsetsByWeek = (
-  year: number,
-  month: number,
-  weekdayOfTheFirst: Weekday,
-  firstCalendarWeekday: Weekday,
-): Array<Array<number>> => {
-  const monthWeekIndexes = [...Array(calendarWeeksInMonth(year, month, firstCalendarWeekday)).keys()];
-  const orderedMonthWeekdays = dayPerWeekRange(firstCalendarWeekday);
-  return monthWeekIndexes.map(weekIndex =>
-    orderedMonthWeekdays.map(weekdayValue => {
-      const dayOffset = adjustedDayOffsetBasedOnFirstCalendarWeekday(weekdayValue, firstCalendarWeekday);
-      return offsetFromWeekAndDay(weekIndex, dayOffset, weekdayOfTheFirst);
-    }),
-  );
-};
-
 const WeekdayHeadings = (props: WeekdayHeadingsProps) => {
   return (
     <div className="Month-week-header">
@@ -94,15 +71,8 @@ const WeekdayHeadings = (props: WeekdayHeadingsProps) => {
 
 export const Month = (props: MonthProps) => {
   const { year, month, locale, firstWeekday: firstCalendarWeekday, borderOptions } = props;
-  const weekdayOfTheFirst = firstWeekdayInMonth(year, month);
   const orderedDaysPerWeek = dayPerWeekRange(firstCalendarWeekday);
-  const monthDayOffsetsByWeekForCurrentMonth = monthDayOffsetsByWeek(
-    year,
-    month,
-    weekdayOfTheFirst,
-    firstCalendarWeekday,
-  );
-
+  const monthDayOffsetsByWeekForCurrentMonth = monthDayOffsetsByWeekForYearMonth(year, month, firstCalendarWeekday);
   return (
     <div className="Month-month">
       {props.renderDayHeading && (

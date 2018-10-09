@@ -1,5 +1,6 @@
 // @flow
 
+import { arrayRotate } from '../util/array';
 import type { Weekday } from '../types';
 
 // https://stackoverflow.com/a/11252167/932896
@@ -17,6 +18,9 @@ function daysBetween(startDate: Date, endDate: Date): number {
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
 }
+
+export const dayPerWeekRange = (firstCalendarWeekday: Weekday) =>
+  arrayRotate([0, 1, 2, 3, 4, 5, 6], firstCalendarWeekday);
 
 export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarWeekday: Weekday): number {
   const indexOfFirstWeekdayOfMonth = firstDayOfTheMonth.getDay(); // getDay is indexed Sun = 0, Sat = 6.
@@ -43,12 +47,23 @@ export const adjustedDayOffsetBasedOnFirstCalendarWeekday = (dayOffset: number, 
   return adjustedDayOffset;
 };
 
-export const offsetFromStart = (value: number, startOffset: number): number => {
-  return value - startOffset;
-};
-
-export const offsetFromWeekAndDay = (week: number, dayOffset: number, firstOfMonthOffset: number): number => {
-  return offsetFromStart(week * 7 + dayOffset, firstOfMonthOffset - 1);
+export const monthDayOffsetsByWeekForYearMonth = (
+  year: number,
+  month: number,
+  firstCalendarWeekday: Weekday,
+): Array<Array<number>> => {
+  const weekdayOfTheFirst = firstWeekdayInMonth(year, month);
+  const orderedMonthWeekdays = dayPerWeekRange(firstCalendarWeekday);
+  const firstDayOfTheMonthDayOffset = adjustedDayOffsetBasedOnFirstCalendarWeekday(
+    orderedMonthWeekdays[0],
+    firstCalendarWeekday,
+  );
+  const adjustedFirstDayOfTheMonthOffset =
+    firstDayOfTheMonthDayOffset > weekdayOfTheFirst ? firstDayOfTheMonthDayOffset - 7 : firstDayOfTheMonthDayOffset;
+  const firstDayOfTheMonthOffsetFromWeekAndDay = adjustedFirstDayOfTheMonthOffset - weekdayOfTheFirst - 1;
+  return [...Array(calendarWeeksInMonth(year, month, firstCalendarWeekday)).keys()].map((_, weekIndex) =>
+    orderedMonthWeekdays.map((_, dayIndex) => firstDayOfTheMonthOffsetFromWeekAndDay + weekIndex * 7 + dayIndex),
+  );
 };
 
 export function calendarWeeksInMonth(year: number, month: number, firstCalendarWeekday: Weekday): number {
