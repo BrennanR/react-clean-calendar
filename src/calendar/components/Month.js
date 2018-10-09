@@ -40,13 +40,7 @@ const dateOfCalendarWeekAndWeekdayIndex = (year: number, month: number, dayOffse
   return new Date(year, month - 1, dayOffset);
 };
 
-const borderStyle = (
-  dayIndex: number,
-  weekIndex: number,
-  lastDayIndex: number,
-  lastWeekIndex: number,
-  borderOptions: BorderOptions,
-) => {
+const borderStyle = (dayIndex: number, weekValue: number, lastWeekValue: number, borderOptions: BorderOptions) => {
   let borderWidth, borderColor;
   if (borderOptions === 'no-border') {
     borderWidth = 0;
@@ -56,8 +50,8 @@ const borderStyle = (
   }
   const borderTop = borderWidth;
   const borderLeft = borderWidth;
-  const borderRight = dayIndex === lastDayIndex ? borderWidth : 0;
-  const borderBottom = weekIndex === lastWeekIndex ? borderWidth : 0;
+  const borderRight = dayIndex === 6 ? borderWidth : 0;
+  const borderBottom = weekValue === lastWeekValue ? borderWidth : 0;
   return {
     borderTop,
     borderRight,
@@ -75,7 +69,7 @@ const monthDayOffsetsByWeek = (
   firstCalendarWeekday: Weekday,
 ): Array<Array<number>> => {
   const monthWeekIndexes = [...Array(calendarWeeksInMonth(year, month, firstCalendarWeekday)).keys()];
-  const orderedMonthWeekdays = [];
+  const orderedMonthWeekdays = dayPerWeekRange(firstCalendarWeekday);
   return monthWeekIndexes.map(weekIndex =>
     orderedMonthWeekdays.map(weekdayValue => {
       const dayOffset = adjustedDayOffsetBasedOnFirstCalendarWeekday(weekdayValue, firstCalendarWeekday);
@@ -101,9 +95,7 @@ const WeekdayHeadings = (props: WeekdayHeadingsProps) => {
 export const Month = (props: MonthProps) => {
   const { year, month, locale, firstWeekday: firstCalendarWeekday, borderOptions } = props;
   const weekdayOfTheFirst = firstWeekdayInMonth(year, month);
-  const weekPerMonthRange = [...Array(calendarWeeksInMonth(year, month, firstCalendarWeekday)).keys()];
   const orderedDaysPerWeek = dayPerWeekRange(firstCalendarWeekday);
-
   const monthDayOffsetsByWeekForCurrentMonth = monthDayOffsetsByWeek(
     year,
     month,
@@ -116,26 +108,24 @@ export const Month = (props: MonthProps) => {
       {props.renderDayHeading && (
         <WeekdayHeadings weekdays={orderedDaysPerWeek} locale={locale} renderDayHeading={props.renderDayHeading} />
       )}
-      {weekPerMonthRange.map(weekOfMonthIndex => (
-        <div key={weekOfMonthIndex} className="Month-week">
-          {orderedDaysPerWeek.map(weekday => {
-            const dayOffset = adjustedDayOffsetBasedOnFirstCalendarWeekday(weekday, firstCalendarWeekday);
-            const calendarDayOffset = offsetFromWeekAndDay(weekOfMonthIndex, dayOffset, weekdayOfTheFirst);
-            const cellDate = dateOfCalendarWeekAndWeekdayIndex(year, month, calendarDayOffset);
-            const cellID = `${weekOfMonthIndex}-${weekday}`;
+      {monthDayOffsetsByWeekForCurrentMonth.map((dayOffsetsForWeek, weekIndex) => (
+        <div key={`${year}-${month}-${weekIndex}`} id={`Month-week-${weekIndex}`} className="Month-week">
+          {dayOffsetsForWeek.map((dayOffset, dayIndex) => {
+            const cellDate = dateOfCalendarWeekAndWeekdayIndex(year, month, dayOffset);
+            const cellID = `${weekIndex}-${dayOffset}`;
             return (
               <div
                 style={{
                   ...borderStyle(
-                    weekday,
-                    weekOfMonthIndex,
-                    orderedDaysPerWeek[orderedDaysPerWeek.length - 1],
-                    weekPerMonthRange.length - 1,
+                    dayIndex,
+                    weekIndex,
+                    monthDayOffsetsByWeekForCurrentMonth.length - 1,
                     borderOptions || defaultBorderOptions,
                   ),
                 }}
-                key={weekday}
-                className={`Month-day Month-day-${cellID}`}
+                key={`${year}-${month}-${dayOffset}`}
+                id={`Month-day-${cellID}`}
+                className="Month-day"
                 onClick={() => props.onDayPress != null && props.onDayPress(cellDate, cellID)}
               >
                 {props.renderDay(cellDate, cellID)}
