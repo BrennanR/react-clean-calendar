@@ -56,7 +56,7 @@ class App extends Component<{}, State> {
                     name={key}
                     value={key}
                     checked={key === this.state.selectedExample}
-                    onClick={() => this.setState({ selectedExample: key })}
+                    onChange={() => this.setState({ selectedExample: key })}
                   />
                   {key}
                 </label>

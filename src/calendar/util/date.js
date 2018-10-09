@@ -30,9 +30,26 @@ export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarW
 }
 
 // Sun = 0, Sat = 6.
-export function firstWeekdayInMonth(year: number, month: number): number {
-  return new Date(year, month - 1, 1).getDay();
+export function firstWeekdayInMonth(year: number, month: number): Weekday {
+  // We know getDay returns 0-6, so force flow to believe we have a Weekday.
+  return ((new Date(year, month - 1, 1).getDay(): any): Weekday);
 }
+
+export const adjustedDayOffsetBasedOnFirstCalendarWeekday = (dayOffset: number, firstCalendarWeekday: number) => {
+  let adjustedDayOffset = dayOffset;
+  if (adjustedDayOffset < firstCalendarWeekday) {
+    adjustedDayOffset += 7;
+  }
+  return adjustedDayOffset;
+};
+
+export const offsetFromStart = (value: number, startOffset: number): number => {
+  return value - startOffset;
+};
+
+export const offsetFromWeekAndDay = (week: number, dayOffset: number, firstOfMonthOffset: number): number => {
+  return offsetFromStart(week * 7 + dayOffset, firstOfMonthOffset - 1);
+};
 
 export function calendarWeeksInMonth(year: number, month: number, firstCalendarWeekday: Weekday): number {
   // The incoming month is 1 indexed. Convert it to 0 indexed.

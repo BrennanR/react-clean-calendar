@@ -177,3 +177,103 @@ Array [
   ],
 ]
 `;
+
+exports[`dayOfMonth calculates the correct days of the month with Monday start of week 1`] = `
+Array [
+  Array [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+  ],
+  Array [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+  ],
+  Array [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ],
+  Array [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+  ],
+  Array [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+  ],
+]
+`;
+
+exports[`dayOfMonth calculates the correct days of the month with Sunday start of week 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+  ],
+  Array [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+  ],
+  Array [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+  ],
+  Array [
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+  ],
+  Array [
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+  ],
+]
+`;
