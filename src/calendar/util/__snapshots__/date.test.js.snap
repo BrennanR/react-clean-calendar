@@ -177,3 +177,212 @@ Array [
   ],
 ]
 `;
+
+exports[`monthDayOffsetsByWeekForYearMonth calculates the correct day offsets for February 2015 with Monday start 1`] = `
+Array [
+  Array [
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+  ],
+  Array [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+  ],
+  Array [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+  ],
+  Array [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+  ],
+  Array [
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+  ],
+]
+`;
+
+exports[`monthDayOffsetsByWeekForYearMonth calculates the correct day offsets for June 2018 with Monday start 1`] = `
+Array [
+  Array [
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+  ],
+  Array [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+  ],
+  Array [
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+  ],
+  Array [
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+  ],
+  Array [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+  ],
+]
+`;
+
+exports[`monthDayOffsetsByWeekForYearMonth calculates the correct day offsets for Nov 2014 with Sunday start 1`] = `
+Array [
+  Array [
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    0,
+    1,
+  ],
+  Array [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+  ],
+  Array [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+  ],
+  Array [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+  ],
+  Array [
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+  ],
+  Array [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+  ],
+]
+`;
+
+exports[`monthDayOffsetsByWeekForYearMonth calculates the correct day offsets for Oct 2018 with Sunday start 1`] = `
+Array [
+  Array [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+  ],
+  Array [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+  ],
+  Array [
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+  ],
+  Array [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+  ],
+  Array [
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+  ],
+]
+`;
