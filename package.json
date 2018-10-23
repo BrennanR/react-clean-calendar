@@ -1,7 +1,8 @@
 {
   "name": "react-clean-calendar",
+  "description": "A simple react month-view calendar that exposes render props.",
   "version": "0.1.1",
-  "author": "Brennan Rauert <brennanrauert@gmail.com>",
+  "author": "Brennan Rauert",
   "license": "MIT",
   "dependencies": {},
   "scripts": {
