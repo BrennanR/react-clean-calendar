@@ -3,9 +3,9 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 
-import { Calendar } from '../calendar/Calendar';
-import { nextMonth } from '../calendar/util/date';
-import { localizedWeekdayNames, localizedYearMonth } from '../calendar/util/localizeDate';
+import { Calendar } from '../lib/Calendar';
+import { nextMonth } from '../lib/util/date';
+import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeDate';
 
 type State = {
   year: number,

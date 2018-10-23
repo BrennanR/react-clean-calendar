@@ -1,0 +1,1 @@
+Examples are not published to npm. For example usage, please see https://github.com/BrennanR/simple-calendar/

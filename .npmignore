@@ -1,0 +1,7 @@
+# Ignore everything
+/*
+/*/
+
+# Except for our dist directory and the license
+!/dist/
+!LICENSE.md

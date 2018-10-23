@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 
-import { Calendar } from '../calendar/Calendar';
+import { Calendar } from '../lib/Calendar';
 
 type State = {
   year: number,

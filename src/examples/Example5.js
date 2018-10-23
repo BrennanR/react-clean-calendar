@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 
-import { Calendar } from '../calendar/Calendar';
-import { DefaultHeading } from '../calendar/components/defaults/DefaultHeading';
-import { nextMonth, previousMonth } from '../calendar/util/date';
-import { localizedWeekdayNames, localizedYearMonth } from '../calendar/util/localizeDate';
+import { Calendar } from '../lib/Calendar';
+import { DefaultHeading } from '../lib/components/defaults/DefaultHeading';
+import { nextMonth, previousMonth } from '../lib/util/date';
+import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeDate';
 
 type State = {
   year: number,
