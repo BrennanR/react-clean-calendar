@@ -1,4 +1,4 @@
-# React Clean Calendar
+## React Clean Calendar [![npm version](https://badge.fury.io/js/react-clean-calendar.png)](https://badge.fury.io/js/react-clean-calendar)
 
 `react-clean-calendar` is a react calendar component that handles the date and basic display logic needed to render a 
 calendar. It calculates how many weeks to render per month, what day the month begins on, and which date belongs on 

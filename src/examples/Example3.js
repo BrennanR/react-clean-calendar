@@ -31,7 +31,7 @@ export class Example3 extends Component<Props, State> {
   render() {
     return (
       <Calendar
-        locale="en-ca"
+        locale="en-us"
         year={this.state.year}
         month={this.state.month}
         renderDay={this.renderDay}
