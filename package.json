@@ -5,6 +5,7 @@
   "author": "Brennan Rauert",
   "license": "MIT",
   "homepage": "https://brennanr.github.io/react-clean-calendar",
+  "main": "dist/index.js",
   "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
