@@ -173,11 +173,11 @@ class App extends Component<{}, State> {
           </form>
         </div>
         <div
-          style={{ display: 'flex', flexDirection: `column`, width: '100%', height: '100%', justifyContent: 'center' }}
+          style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
           className="App"
         >
-          <div style={{ marginTop: 10, marginBottom: 5 }}>{EXAMPLES[this.state.selectedExample].description}</div>
-          <hr style={{ width: '100%' }} />
+          <div style={{ marginTop: 5, marginBottom: 5 }}>{EXAMPLES[this.state.selectedExample].description}</div>
+          <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
           {this.renderExample(EXAMPLES[this.state.selectedExample].component)}
         </div>
       </div>
