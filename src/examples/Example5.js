@@ -16,7 +16,7 @@ type State = {
 type Props = {};
 
 export class Example5 extends Component<Props, State> {
-  locale = 'en-ca';
+  locale = 'en-us';
   localizedWeekdayNames = localizedWeekdayNames(this.locale, 'short');
 
   constructor(props: Props) {

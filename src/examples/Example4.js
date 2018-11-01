@@ -16,7 +16,7 @@ type Props = {};
 
 /** This example shows a calendar rendered in English with paging implemented via the component's state. */
 export class Example4 extends Component<Props, State> {
-  locale = 'en-ca';
+  locale = 'en-us';
   localizedWeekdayNames = localizedWeekdayNames(this.locale, 'narrow');
 
   constructor(props: Props) {
