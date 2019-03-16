@@ -5,7 +5,8 @@
   "author": "Brennan Rauert",
   "license": "MIT",
   "homepage": "https://brennanr.github.io/react-clean-calendar",
-  "main": "dist/index.js",
+  "main": "dist/build/react-clean-calendar.js",
+  "module": "dist/index.js",
   "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
@@ -36,8 +37,8 @@
     "rollup-plugin-terser": "^4.0.4"
   },
   "peerDependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.3 || ^16.8.0-alpha",
+    "react-dom": "^16.3 || ^16.8.0-alpha"
   },
   "browserslist": [
     ">0.2%",
