@@ -18,11 +18,11 @@ type MonthProps = {|
   borderOptions?: BorderOptions,
 |};
 
-type WeekdayHeadingsProps = {
+type WeekdayHeadingsProps = {|
   locale: string,
   weekdays: Array<Weekday>,
   renderDayHeading: (dayIndex: number) => Node,
-};
+|};
 
 const defaultBorderOptions: BorderOptions = {
   width: 1,

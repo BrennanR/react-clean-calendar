@@ -19,8 +19,8 @@ function daysBetween(startDate: Date, endDate: Date): number {
   return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
 }
 
-export const dayPerWeekRange = (firstCalendarWeekday: Weekday) =>
-  arrayRotate([0, 1, 2, 3, 4, 5, 6], firstCalendarWeekday);
+export const dayPerWeekRange = (firstCalendarWeekday: Weekday): Array<Weekday> =>
+  arrayRotate<Weekday>([0, 1, 2, 3, 4, 5, 6], firstCalendarWeekday);
 
 export function daysInFirstCalendarWeek(firstDayOfTheMonth: Date, firstCalendarWeekday: Weekday): number {
   const indexOfFirstWeekdayOfMonth = firstDayOfTheMonth.getDay(); // getDay is indexed Sun = 0, Sat = 6.
