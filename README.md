@@ -90,9 +90,9 @@ library is not for building a date-picker, although there's no reason it couldn'
 
 React clean calendar has no dependencies beyond `react` and `react-dom`.
 
-## UMD Example
+## UMD
 
-See this codepen for an example of the calendar using UMD imports for react, react-dom, react-clean-calendar, and babel.
+The UMD module uses the global variable `RCCal`. See this codepen for an example of the calendar using UMD imports for react, react-dom, react-clean-calendar, and babel.
 
 https://codepen.io/broar/pen/GeGpgV
 
