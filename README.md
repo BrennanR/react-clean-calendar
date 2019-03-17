@@ -90,5 +90,13 @@ library is not for building a date-picker, although there's no reason it couldn'
 
 React clean calendar has no dependencies beyond `react` and `react-dom`.
 
+## UMD Example
+
+See this codepen for an example of the calendar using UMD imports for react, react-dom, react-clean-calendar, and babel.
+
+https://codepen.io/broar/pen/GeGpgV
+
+Note: In production I don't recommend importing the project this way. I recommend downloading it through npm and building it into your project with webpack (or any other JS build tool). However, the UMD module can be imported to quickly prototype or get started with the calendar.
+
 ## License
 The project is licensed under The MIT License. See LICENSE.md for details.
