@@ -1,6 +1,13 @@
 {
-  "main.css": "static/css/main.11e37adb.css",
-  "main.css.map": "static/css/main.11e37adb.css.map",
-  "main.js": "static/js/main.86e829a8.js",
-  "main.js.map": "static/js/main.86e829a8.js.map"
+  "main.css": "/react-clean-calendar/static/css/main.763362fc.chunk.css",
+  "main.js": "/react-clean-calendar/static/js/main.a4ea2305.chunk.js",
+  "main.js.map": "/react-clean-calendar/static/js/main.a4ea2305.chunk.js.map",
+  "runtime~main.js": "/react-clean-calendar/static/js/runtime~main.e3675146.js",
+  "runtime~main.js.map": "/react-clean-calendar/static/js/runtime~main.e3675146.js.map",
+  "static/js/2.6c3e4f80.chunk.js": "/react-clean-calendar/static/js/2.6c3e4f80.chunk.js",
+  "static/js/2.6c3e4f80.chunk.js.map": "/react-clean-calendar/static/js/2.6c3e4f80.chunk.js.map",
+  "index.html": "/react-clean-calendar/index.html",
+  "precache-manifest.44e0270554aa71056018b9b2da9e4153.js": "/react-clean-calendar/precache-manifest.44e0270554aa71056018b9b2da9e4153.js",
+  "service-worker.js": "/react-clean-calendar/service-worker.js",
+  "static/css/main.763362fc.chunk.css.map": "/react-clean-calendar/static/css/main.763362fc.chunk.css.map"
 }
