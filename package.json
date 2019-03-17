@@ -4,7 +4,7 @@
   "version": "0.1.4",
   "author": "Brennan Rauert",
   "license": "MIT",
-  "homepage": "https://brennanr.github.io/react-clean-calendar",
+  "homepage": "https://github.com/BrennanR/react-clean-calendar",
   "main": "dist/build/react-clean-calendar.js",
   "module": "dist/index.js",
   "dependencies": {},
