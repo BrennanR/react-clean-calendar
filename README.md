@@ -29,15 +29,13 @@ const App = (props) => {
 
 Note: all functions and components accept and return 1-indexed month values (1=Jan, 12=Dec).
 
-More examples can be found [here](https://brennanr.github.io/react-clean-calendar/).
-
 ## Exports
 
 ### Calendar
 - The main react calendar component.
 
 ### DefaultCalendarHeading
-- A simple implementation of a calendar heading. It includes pagination buttons for paging the calendar.
+- A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
 
 ### localizedWeekdayNamesStartingWith(locale: string, format: WeekdayFormat, startingWeekDay: Weekday)
 - Provided with a locale and format, this will return weekday names you can display as calendar day headings.
