@@ -5,9 +5,13 @@ import { terser } from 'rollup-plugin-terser';
 export default {
   input: 'src/lib/index.js',
   output: {
-    file: 'dist/build/react-clean-calendar.js',
-    format: 'cjs',
+    file: 'dist/umd/react-clean-calendar.js',
+    format: 'umd',
+    name: 'RCCal',
     sourcemap: true,
+    globals: {
+      react: 'React',
+    },
   },
   external: ['react'],
   plugins: [
