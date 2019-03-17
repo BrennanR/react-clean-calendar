@@ -1,5 +1,6 @@
 Preparing a release to [npm](https://www.npmjs.com/package/react-clean-calendar):
 
+1. Bump the version number in package.json.
 1. Run the `build-npm-lib` npm script.
 1. Run the `deploy-npm-lib` npm script.
 

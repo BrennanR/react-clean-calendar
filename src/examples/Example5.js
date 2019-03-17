@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 
 import { Calendar } from '../lib/Calendar';
-import { DefaultHeading } from '../lib/components/defaults/DefaultHeading';
+import { DefaultCalendarHeading } from '../lib/components/defaults/DefaultCalendarHeading';
 import { nextMonth, previousMonth } from '../lib/util/date';
 import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeDate';
 
@@ -27,7 +27,7 @@ export class Example5 extends Component<Props, State> {
 
   renderHeading = () => {
     return (
-      <DefaultHeading
+      <DefaultCalendarHeading
         title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
         onNextMonthClicked={() => {
           const { year, month } = nextMonth(this.state.year, this.state.month);

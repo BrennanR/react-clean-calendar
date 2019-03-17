@@ -2,13 +2,13 @@
 
 import React from 'react';
 
-type DefaultHeadingProps = {
+type DefaultCalendarHeadingProps = {
   title: string,
   onNextMonthClicked: () => void,
   onPreviousMonthClicked: () => void,
 };
 
-export const DefaultHeading = (props: DefaultHeadingProps) => {
+export const DefaultCalendarHeading = (props: DefaultCalendarHeadingProps) => {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', marginTop: 5, marginBottom: 5 }}>
       <button onClick={props.onPreviousMonthClicked}>{'<<<'}</button>

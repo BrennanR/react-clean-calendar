@@ -1,11 +1,11 @@
 import { Calendar } from './Calendar';
 export { Calendar };
 
-import { DefaultHeading } from './components/defaults/DefaultHeading';
-export { DefaultHeading };
+import { DefaultCalendarHeading } from './components/defaults/DefaultCalendarHeading';
+export { DefaultCalendarHeading };
 
 import { nextMonth, previousMonth } from './util/date';
 export { nextMonth, previousMonth };
 
-import { localizedWeekdayNames, localizedYearMonth } from './util/localizeDate';
-export { localizedWeekdayNames, localizedYearMonth };
+import { localizedWeekdayNamesStartingWith, localizedYearMonth } from './util/localizeDate';
+export { localizedWeekdayNamesStartingWith, localizedYearMonth };
