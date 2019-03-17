@@ -9,12 +9,6 @@ North America, Monday in Europe) will render enough rows to display each day of 
 The calendar provides little to no styling for content inside of day cells. A `renderDay` prop is provided that lets
 you control and render the day exactly how you'd like.
 
-`react-clean-calendar` is meant to be a base for you to build your own custom calendars on top of. There are some
-reasonable defaults provided, but by-and-large the style and content implementation details are completely up to you.
-
-`react-clean-calendar` is primarily built and meant to serve as a full-screen calendar component. The focus of this
-library is not for building a date-picker, although there's no reason it couldn't be used for that.
-
 ## Example
 
 ```
@@ -37,8 +31,7 @@ Note: all functions and components accept and return 1-indexed month values (1=J
 
 More examples can be found [here](https://brennanr.github.io/react-clean-calendar/).
 
-## Utilities
-`react-clean-calendar` provides a number of useful utilities functions. It exports:
+## Exports
 
 ### Calendar
 - The main react calendar component.
@@ -84,14 +77,20 @@ The styling is attached to these classes:
 You may have to customize or override this default styling if you can't achieve the layout you want because of it.
 
 ## Philosophy
-React clean calendar was built to be a fully customizable calendar component. Other projects like
+`react-clean-calendar` was built to be a fully customizable calendar component. Other projects like
 [rc-calendar](https://github.com/react-component/calendar) and
 [react-big-calendar](https://github.com/intljusticemission/react-big-calendar) proved too hard to customize, because of
-UI decisions they made. If you're searching for a calendar for your project, I'd look at those more feature-filled
-calendars before choosing this one. This calendar simply provides you with data about days. You're left to render data
-into those day-cells on your own.
+styling decisions they made that could not be simply overidden. If you're searching for a calendar for your project, 
+I'd look at those more feature-filled calendars before choosing this one. This calendar simply provides you with data
+about days. You're left to render data into those day-cells on your own.
 
-React clean calendar has no dependencies beyond react.
+`react-clean-calendar` is meant to be a base for you to build your own custom calendars on top of. There are some
+reasonable defaults provided, but by-and-large the style and content implementation details are completely up to you.
+
+`react-clean-calendar` is primarily built and meant to serve as a full-screen calendar component. The focus of this
+library is not for building a date-picker, although there's no reason it couldn't be used for that.
+
+React clean calendar has no dependencies beyond `react` and `react-dom`.
 
 ## License
 The project is licensed under The MIT License. See LICENSE.md for details.
