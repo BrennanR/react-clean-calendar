@@ -86,7 +86,7 @@ localizedYearMonth('en-us', 'short', 'numeric', 2019, 1)
 => Jan 2019
 ```
 
-### nextMonth(year: number, month: number)
+### nextMonth
 - Given a year/month, returns an object containing the next year/month.
 
 ```javascript
