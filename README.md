@@ -11,14 +11,14 @@ you control and render the day exactly how you'd like.
 
 ## Example
 
-```
+```JSX
 import React, { Component } from 'react';
 import { Calendar } from 'react-clean-calendar';
 
 const App = (props) => {
   return (
     <Calendar
-      locale={`en-us`}
+      locale="en-us"
       year={2019}
       month={1}
       renderDay={(date, cellID) => <div>{date.toString()}</div>}
@@ -37,30 +37,91 @@ Note: all functions and components accept and return 1-indexed month values (1=J
 ### DefaultCalendarHeading
 - A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
 
-### localizedWeekdayNamesStartingWith(locale: string, format: WeekdayFormat, startingWeekDay: Weekday)
+### localizedWeekdayNamesStartingWith
+
 - Provided with a locale and format, this will return weekday names you can display as calendar day headings.
-- Eg. 
-```
-localizedWeekdayNamesStartingWith('en-us', 'long', 0) -> 
-  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-```
-- Eg. 
-```
-localizedWeekdayNamesStartingWith('en-us', 'long', 1) ->
-  ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+```javascript
+localizedWeekdayNamesStartingWith(
+  locale: string,
+  format: WeekdayFormat,
+  startingWeekDay: Weekday,
+)
 ```
 
-### localizedYearMonth(locale: string, monthFormat: MonthFormat, yearFormat: YearFormat, year: number, month: number)
+Examples:
+
+```javascript
+localizedWeekdayNamesStartingWith('en-us', 'long', 0)
+
+=> ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+```
+
+```javascript
+localizedWeekdayNamesStartingWith('en-us', 'long', 1)
+
+=> ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+```
+
+### localizedYearMonth
+
 - Provided with a locale, format, year, and month, this will return a localized string. This can be used as a heading
 for the entire calendar.
 
+```javascript
+localizedYearMonth(
+  locale: string,
+  monthFormat: MonthFormat,
+  yearFormat: YearFormat,
+  year: number,
+  month: number,
+)
+```
+
+Examples
+
+```javascript
+localizedYearMonth('en-us', 'short', 'numeric', 2019, 1)
+
+=> Jan 2019
+```
+
 ### nextMonth(year: number, month: number)
 - Given a year/month, returns an object containing the next year/month.
-- Eg. `nextMonth(2019, 12) -> { year: 2020, month: 1 }`.
 
-### previousMonth(year: number, month: number)
+```javascript
+nextMonth(
+  year: number,
+  month: number,
+)
+```
+
+
+Examples
+
+```javascript
+nextMonth(2019, 12)
+
+=> { year: 2020, month: 1 }
+```
+
+### previousMonth
 - Given a year/month, returns an object containing the previous year/month.
-- Eg. `previousMonth(2020, 1) -> { year: 2019, month: 12 }`.
+
+```javascript
+previousMonth(
+  year: number,
+  month: number,
+)
+```
+
+Examples
+
+```javascript
+previousMonth(2020, 1)
+
+=> { year: 2019, month: 12 }
+```
 
 ## Styling
 Internally, the calendar uses flex-box to lay itself out. A small amount of CSS is used to style the calendar.
