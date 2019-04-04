@@ -1,6 +1,12 @@
 // @flow
 
-import { localizedWeekdayNames, localizedWeekdayNamesStartingWith } from './localizeDate';
+import { localizedWeekdayNames, localizedWeekdayNamesStartingWith, localizedYearMonth } from './localizeDate';
+
+describe('localizedYearMonth', () => {
+  it('works for years and months in English', () => {
+    expect(localizedYearMonth('en-us', 'short', 'numeric', 2019, 1)).toEqual('Jan 2019');
+  });
+});
 
 describe('localizedWeekdayNames', () => {
   it('works for long weekday descriptions in English', () => {

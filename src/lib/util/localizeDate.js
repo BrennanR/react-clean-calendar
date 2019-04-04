@@ -1,6 +1,7 @@
 // @flow
 
 import { arrayRotate } from './array.js';
+import { range } from './range.js';
 import type { Week, Weekday } from '../types';
 
 export type YearFormat = 'numeric' | '2-digit';
@@ -23,13 +24,12 @@ export function localizedWeekdayNames(locale: string, format: WeekdayFormat): We
   // need concrete dates in order to get localized weekday names, using only native Javascript.
   const sunday = new Date(259200000);
   // We (mostly) trust ourselves, so we type-cast the result of this to 'Week'.
-  return ((Array(7)
-    .fill()
-    .map((_, i) => {
-      const date = new Date(sunday.valueOf());
-      date.setDate(date.getDate() + i);
-      return date.toLocaleDateString(locale, { weekday: format, timeZone: 'utc' });
-    }): any): Week);
+  const weekdayNames = range(0, 7).map((_, i) => {
+    const date = new Date(sunday.valueOf());
+    date.setDate(date.getDate() + i);
+    return date.toLocaleDateString(locale, { weekday: format, timeZone: 'utc' });
+  });
+  return ((weekdayNames: any): Week);
 }
 
 /**

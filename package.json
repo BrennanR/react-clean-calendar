@@ -11,6 +11,7 @@
   "module": "dist/index.js",
   "scripts": {
     "start": "react-scripts start",
+    "test": "react-scripts test",
     "build-npm-lib": "rm -rf dist && set \"NODE_ENV=production\" && babel src/lib --out-dir dist --ignore src/lib/types.js,**/*.test.js && rollup -c",
     "deploy-npm-lib": "npm publish",
     "build-github-page": "react-scripts build",
