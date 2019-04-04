@@ -1,5 +1,6 @@
 // @flow
 
+import { range } from '../util/range';
 import { arrayRotate } from '../util/array';
 import type { Weekday } from '../types';
 
@@ -61,7 +62,7 @@ export const monthDayOffsetsByWeekForYearMonth = (
   const adjustedFirstDayOfTheMonthOffset =
     firstDayOfTheMonthDayOffset > weekdayOfTheFirst ? firstDayOfTheMonthDayOffset - 7 : firstDayOfTheMonthDayOffset;
   const firstDayOfTheMonthOffsetFromWeekAndDay = adjustedFirstDayOfTheMonthOffset - weekdayOfTheFirst + 1;
-  return [...Array(calendarWeeksInMonth(year, month, firstCalendarWeekday)).keys()].map((_, weekIndex) =>
+  return range(0, calendarWeeksInMonth(year, month, firstCalendarWeekday)).map((_, weekIndex) =>
     orderedMonthWeekdays.map((_, dayIndex) => firstDayOfTheMonthOffsetFromWeekAndDay + weekIndex * 7 + dayIndex),
   );
 };
