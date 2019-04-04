@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/BrennanR/react-clean-calendar/precache-manifest.e4e15ae96ee3c7bb412b44ba33f1a19f.js"
+  "/react-clean-calendar/precache-manifest.4020e2fc08d06cacb7179c066a9391da.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/BrennanR/react-clean-calendar/index.html", {
+workbox.routing.registerNavigationRoute("/react-clean-calendar/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

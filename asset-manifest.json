@@ -1,13 +1,13 @@
 {
-  "main.css": "/BrennanR/react-clean-calendar/static/css/main.763362fc.chunk.css",
-  "main.js": "/BrennanR/react-clean-calendar/static/js/main.09c5bb95.chunk.js",
-  "main.js.map": "/BrennanR/react-clean-calendar/static/js/main.09c5bb95.chunk.js.map",
-  "runtime~main.js": "/BrennanR/react-clean-calendar/static/js/runtime~main.afb88344.js",
-  "runtime~main.js.map": "/BrennanR/react-clean-calendar/static/js/runtime~main.afb88344.js.map",
-  "static/js/2.6c3e4f80.chunk.js": "/BrennanR/react-clean-calendar/static/js/2.6c3e4f80.chunk.js",
-  "static/js/2.6c3e4f80.chunk.js.map": "/BrennanR/react-clean-calendar/static/js/2.6c3e4f80.chunk.js.map",
-  "index.html": "/BrennanR/react-clean-calendar/index.html",
-  "precache-manifest.e4e15ae96ee3c7bb412b44ba33f1a19f.js": "/BrennanR/react-clean-calendar/precache-manifest.e4e15ae96ee3c7bb412b44ba33f1a19f.js",
-  "service-worker.js": "/BrennanR/react-clean-calendar/service-worker.js",
-  "static/css/main.763362fc.chunk.css.map": "/BrennanR/react-clean-calendar/static/css/main.763362fc.chunk.css.map"
+  "main.css": "/react-clean-calendar/static/css/main.763362fc.chunk.css",
+  "main.js": "/react-clean-calendar/static/js/main.09c5bb95.chunk.js",
+  "main.js.map": "/react-clean-calendar/static/js/main.09c5bb95.chunk.js.map",
+  "runtime~main.js": "/react-clean-calendar/static/js/runtime~main.e3675146.js",
+  "runtime~main.js.map": "/react-clean-calendar/static/js/runtime~main.e3675146.js.map",
+  "static/js/2.6c3e4f80.chunk.js": "/react-clean-calendar/static/js/2.6c3e4f80.chunk.js",
+  "static/js/2.6c3e4f80.chunk.js.map": "/react-clean-calendar/static/js/2.6c3e4f80.chunk.js.map",
+  "index.html": "/react-clean-calendar/index.html",
+  "precache-manifest.4020e2fc08d06cacb7179c066a9391da.js": "/react-clean-calendar/precache-manifest.4020e2fc08d06cacb7179c066a9391da.js",
+  "service-worker.js": "/react-clean-calendar/service-worker.js",
+  "static/css/main.763362fc.chunk.css.map": "/react-clean-calendar/static/css/main.763362fc.chunk.css.map"
 }
