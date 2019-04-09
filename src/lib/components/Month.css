@@ -1,6 +1,6 @@
 .Month-month {
   display: flex;
-  flex: 1;
+  flex: 1 0 auto;
   flex-flow: column nowrap;
   align-items: stretch;
 }
@@ -8,11 +8,17 @@
 .Month-week {
   width: 100%;
   display: flex;
-  flex: 1;
+  /* noinspection CssRedundantUnit */
+  flex: 1 0 0%; /* the 'redundant' unit is necessary for IE11. */
 }
 
 .Month-day {
-  flex: 1;
+  /* min-width: 0 ensures the flex layout won't expand to fit its child content, if the child content is too big. 
+   * Since we're a calendar layout, our main concern is the calendar days being exactly the same size.
+   */
+  min-width: 0;
+  /* noinspection CssRedundantUnit */
+  flex: 1 0 0%; /* the 'redundant' unit is necessary for IE11. */
 }
 
 .Month-week-header {
@@ -22,5 +28,6 @@
 }
 
 .Month-week-header-weekday {
-  flex: 1;
+  /* noinspection CssRedundantUnit */
+  flex: 1 0 0%; /* the 'redundant' unit is necessary for IE11. */
 }
