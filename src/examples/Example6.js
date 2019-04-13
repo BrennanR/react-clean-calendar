@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import type { Node } from 'react';
 
 import { Calendar } from '../lib/Calendar';
@@ -13,50 +13,36 @@ type Event = {
   description: string,
 };
 
-type State = {
-  year: number,
-  month: number,
-  selectedCellIDs: Array<string>,
-  events: Array<Event>,
-};
+const Example6 = () => {
+  const locale = 'en-us';
+  const weekdayNames = localizedWeekdayNames(locale, 'long');
 
-type Props = {};
+  const [yearMonth, setYearMonth] = useState<{ year: number, month: number }>({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+  const [selectedCellIDs, setSelectedCellIDs] = useState<Array<string>>([]);
+  const [events] = useState<Array<Event>>([
+    { date: '2019-04-15', description: 'Pay Day' },
+    { date: '2019-04-15', description: "Doctor's Appointment" },
+    { date: '2019-04-28', description: "Carl's Birthday" },
+  ]);
 
-export class Example6 extends Component<Props, State> {
-  locale = 'en-us';
-  localizedWeekdayNames = localizedWeekdayNames(this.locale, 'long');
-
-  constructor(props: Props) {
-    super(props);
-    const date = new Date();
-    this.state = {
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      selectedCellIDs: [],
-      events: [
-        { date: '2019-04-15', description: 'Pay Day' },
-        { date: '2019-04-15', description: "Doctor's Appointment" },
-        { date: '2019-04-28', description: "Carl's Birthday" },
-      ],
-    };
-  }
-
-  onDayPress = (date: Date, cellID: string) => {
-    if (this.state.selectedCellIDs.indexOf(cellID) !== -1) {
-      this.setState({ selectedCellIDs: this.state.selectedCellIDs.filter(cID => cID !== cellID) });
+  const onDayPress = (date: Date, cellID: string) => {
+    if (selectedCellIDs.indexOf(cellID) !== -1) {
+      setSelectedCellIDs(selectedCellIDs.filter(cID => cID !== cellID));
     } else {
-      this.setState({ selectedCellIDs: [...this.state.selectedCellIDs, cellID] });
+      setSelectedCellIDs([...selectedCellIDs, cellID]);
     }
   };
 
-  eventsOnDate = (date: Date) => {
-    return this.state.events.filter(event => event.date === date.toISOString().substring(0, 10));
+  const eventsOnDate = (date: Date) => {
+    return events.filter(event => event.date === date.toISOString().substring(0, 10));
   };
 
-  renderDay = (date: Date, cellID: string, selectedYear: number, selectedMonth: number) => {
+  const renderDay = (date: Date, cellID: string, selectedYear: number, selectedMonth: number) => {
     const dayNumber = date.getDate();
-    const dayText =
-      dayNumber === 1 ? `${date.toLocaleDateString(this.locale, { month: 'short' })} ${dayNumber}` : dayNumber;
+    const dayText = dayNumber === 1 ? `${date.toLocaleDateString(locale, { month: 'short' })} ${dayNumber}` : dayNumber;
     const selectedMonthStartDate = new Date(selectedYear, selectedMonth - 1, 1); // first day of month.
     const selectedMonthEndDate = new Date(selectedYear, selectedMonth, 0); // last day of month.
     const dayIsInSelectedMonth = date >= selectedMonthStartDate && date <= selectedMonthEndDate;
@@ -69,8 +55,8 @@ export class Example6 extends Component<Props, State> {
     } else if (dayIsInSelectedMonth) {
       color = `black`;
     }
-    const events = this.eventsOnDate(date);
-    const backgroundColor = this.state.selectedCellIDs.indexOf(cellID) !== -1 ? `yellow` : `white`;
+    const events = eventsOnDate(date);
+    const backgroundColor = selectedCellIDs.indexOf(cellID) !== -1 ? `yellow` : `white`;
     return (
       <div
         style={{
@@ -131,36 +117,36 @@ export class Example6 extends Component<Props, State> {
     );
   };
 
-  renderDayHeading = (dayIndex: number): Node => <div>{this.localizedWeekdayNames[dayIndex]}</div>;
+  const renderDayHeading = (dayIndex: number): Node => <div>{weekdayNames[dayIndex]}</div>;
 
-  renderHeading = () => {
+  const renderHeading = () => {
     return (
       <DefaultCalendarHeading
-        title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
+        title={localizedYearMonth(locale, 'long', 'numeric', yearMonth.year, yearMonth.month)}
         onNextMonthClicked={() => {
-          const { year, month } = nextMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
+          const { year, month } = nextMonth(yearMonth.year, yearMonth.month);
+          setYearMonth({ year, month });
         }}
         onPreviousMonthClicked={() => {
-          const { year, month } = previousMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
+          const { year, month } = previousMonth(yearMonth.year, yearMonth.month);
+          setYearMonth({ year, month });
         }}
       />
     );
   };
 
-  render() {
-    return (
-      <Calendar
-        locale={this.locale}
-        year={this.state.year}
-        month={this.state.month}
-        renderDay={(date, cellID) => this.renderDay(date, cellID, this.state.year, this.state.month)}
-        renderDayHeading={this.renderDayHeading}
-        renderHeading={this.renderHeading}
-        borderOptions={{ width: 0.5, color: 'black' }}
-        onDayPress={this.onDayPress}
-      />
-    );
-  }
-}
+  return (
+    <Calendar
+      locale={locale}
+      year={yearMonth.year}
+      month={yearMonth.month}
+      renderDay={(date, cellID) => renderDay(date, cellID, yearMonth.year, yearMonth.month)}
+      renderHeading={renderHeading}
+      renderDayHeading={renderDayHeading}
+      borderOptions={{ width: 1, color: 'black' }}
+      onDayPress={onDayPress}
+    />
+  );
+};
+
+export { Example6 };

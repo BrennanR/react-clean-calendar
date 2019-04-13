@@ -34,5 +34,6 @@ module.exports = {
       },
     ],
     "no-duplicate-imports": "off",
+    "react/display-name": "off",
   },
 };

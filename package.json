@@ -1,7 +1,13 @@
 {
   "name": "react-clean-calendar",
   "description": "A simple react month-view calendar that exposes render props.",
-  "keywords": ["react", "calendar", "month", "full calendar", "render props"],
+  "keywords": [
+    "react",
+    "calendar",
+    "month",
+    "full calendar",
+    "render props"
+  ],
   "version": "0.1.5",
   "author": "Brennan Rauert",
   "license": "MIT",
@@ -32,8 +38,8 @@
     "flow-bin": "^0.80.0",
     "gh-pages": "^2.0.1",
     "prettier": "1.14.3",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-postcss": "^2.0.3",
