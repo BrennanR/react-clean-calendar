@@ -9,6 +9,7 @@ import { Example4 } from './examples/Example4';
 import { Example5 } from './examples/Example5';
 import { Example6 } from './examples/Example6';
 import { Example7 } from './examples/Example7';
+import { Example8 } from './examples/Example8';
 import './App.css';
 
 type State = {
@@ -18,6 +19,22 @@ type State = {
 const shortDescriptionStyle = { padding: 0, margin: 0, marginLeft: 30, marginBottom: 15, marginTop: 5 };
 
 const EXAMPLES = {
+  Example8: {
+    component: Example8,
+    shortDescription: (
+      <ul style={shortDescriptionStyle}>
+        <li>Example</li>
+      </ul>
+    ),
+    description: (
+      <ul>
+        <li>{'Example8'}</li>
+        <li>
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
+        </li>
+      </ul>
+    ),
+  },
   Example7: {
     component: Example7,
     shortDescription: (
