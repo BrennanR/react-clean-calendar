@@ -24,8 +24,7 @@
     "deploy-github-page": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/preset-flow": "^7.0.0",
@@ -37,7 +36,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "^0.80.0",
+    "flow-bin": "^0.97.0",
     "gh-pages": "^2.0.1",
     "prettier": "1.17.0",
     "react": "^16.8.6",

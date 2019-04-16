@@ -1,3 +1,7 @@
+/* eslint-disable */
+
+// This is all stack overflow internet code. Don't bother linting it.
+
 export function rgbToHex(color) {
   color = `${color}`;
   if (!color || color.indexOf('rgb') < 0) {

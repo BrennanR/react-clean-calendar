@@ -84,6 +84,20 @@ export function calendarWeeksInMonth(year: number, month: number, firstCalendarW
   return Math.ceil(daysInMonthExcludingFirstWeek / 7) + 1;
 }
 
+export const nextYearMonth = ({ year, month }: { year: number, month: number }) => {
+  if (month === 12) {
+    return { year: year + 1, month: 1 };
+  }
+  return { year, month: month + 1 };
+};
+
+export const previousYearMonth = ({ year, month }: { year: number, month: number }) => {
+  if (month === 1) {
+    return { year: year - 1, month: 12 };
+  }
+  return { year, month: month - 1 };
+};
+
 export function nextMonth(year: number, month: number) {
   if (month === 12) {
     return { year: year + 1, month: 1 };

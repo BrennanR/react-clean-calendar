@@ -1,12 +1,12 @@
 // @flow
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import type { Node } from 'react';
-import { useMeasure } from '@softbind/react-hooks';
 
+import { Pager } from './Pager';
 import { Calendar } from '../lib/Calendar';
 import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeDate';
-import { nextMonth as getNextMonth, previousMonth as getPreviousMonth } from '../lib/util/date';
+import { nextYearMonth, previousYearMonth } from '../lib/util/date';
 import { DefaultCalendarHeading } from '../lib/components/defaults/DefaultCalendarHeading';
 
 const Day = ({ date }: { date: Date }) => (
@@ -18,7 +18,7 @@ const Day = ({ date }: { date: Date }) => (
 const locale = 'en-us';
 const weekdayNames = localizedWeekdayNames(locale, 'long');
 const renderDayHeading = (dayIndex: number): Node => <div>{weekdayNames[dayIndex]}</div>;
-const CalendarMonth = ({ locale, year, month }: { locale: string, year: number, month: number }) => (
+const CalendarMonth = ({ year, month }: { year: number, month: number }) => (
   <Calendar
     locale={locale}
     year={year}
@@ -28,41 +28,62 @@ const CalendarMonth = ({ locale, year, month }: { locale: string, year: number, 
   />
 );
 
+const yearMonthToKey = (yearMonth: { year: number, month: number }): string =>
+  `${yearMonth.year}${`-`}${yearMonth.month}`;
+
+const monthSliderEntry = (yearMonth): { key: string, element: any } => ({
+  key: yearMonthToKey(yearMonth),
+  element: <CalendarMonth key={yearMonthToKey(yearMonth)} year={yearMonth.year} month={yearMonth.month} />,
+});
+
 export const Example7 = () => {
   const [currentYearMonth, setCurrentYearMonth] = useState<{ year: number, month: number }>({ year: 2019, month: 6 });
-  const [monthsInSlider, setMonthsInSlider] = useState<Array<[string, any]>>([]);
-  const calendarContainerRef = useRef(null);
-  const { bounds } = useMeasure(calendarContainerRef, 'bounds');
+  const [monthsInSlider, setMonthsInSlider] = useState<Array<{ key: string, element: any }>>([
+    monthSliderEntry(previousYearMonth(previousYearMonth(currentYearMonth))),
+    monthSliderEntry(previousYearMonth(currentYearMonth)),
+    monthSliderEntry(currentYearMonth),
+    monthSliderEntry(nextYearMonth(currentYearMonth)),
+    monthSliderEntry(nextYearMonth(nextYearMonth(currentYearMonth))),
+  ]);
 
-  const { height = 0, width = 0 } = bounds || {};
+  const appendMonths = appendStartingAtYearMonth => {
+    setMonthsInSlider(prevMonths => [
+      ...prevMonths,
+      monthSliderEntry(appendStartingAtYearMonth),
+      monthSliderEntry(nextYearMonth(appendStartingAtYearMonth)),
+    ]);
+  };
+
+  const prependMonths = prependStartingAtYearMonth => {
+    setMonthsInSlider(prevMonths => [
+      monthSliderEntry(previousYearMonth(prependStartingAtYearMonth)),
+      monthSliderEntry(prependStartingAtYearMonth),
+      ...prevMonths,
+    ]);
+  };
 
   return (
     <div style={{ display: `flex`, flexDirection: `column`, height: `100%`, width: `100%` }}>
       <DefaultCalendarHeading
         title={localizedYearMonth(locale, 'long', 'numeric', currentYearMonth.year, currentYearMonth.month)}
         onNextMonthClicked={() => {
-          const { year, month } = getNextMonth(currentYearMonth.year, currentYearMonth.month);
-          setCurrentYearMonth({ year, month });
+          const newYearMonth = nextYearMonth(currentYearMonth);
+          const afterNewYearMonth = nextYearMonth(newYearMonth);
+          setCurrentYearMonth(newYearMonth);
+          if (yearMonthToKey(afterNewYearMonth) === monthsInSlider[monthsInSlider.length - 1].key) {
+            appendMonths(nextYearMonth(afterNewYearMonth));
+          }
         }}
         onPreviousMonthClicked={() => {
-          const { year, month } = getPreviousMonth(currentYearMonth.year, currentYearMonth.month);
-          setCurrentYearMonth({ year, month });
+          const newYearMonth = previousYearMonth(currentYearMonth);
+          const previousToNewYearMonth = previousYearMonth(newYearMonth);
+          setCurrentYearMonth(newYearMonth);
+          if (yearMonthToKey(previousToNewYearMonth) === monthsInSlider[0].key) {
+            prependMonths(previousYearMonth(previousToNewYearMonth));
+          }
         }}
       />
-      <div style={{ flex: 1, width: `100%` }} ref={calendarContainerRef}>
-        <div style={{ width, height }}>
-          {bounds &&
-            monthsInSlider &&
-            monthsInSlider.map(([key, month]) => {
-              return (
-                // The slider library overwrites the outer-div for each slide, so style the inner one.
-                <div key={key}>
-                  <div style={{ display: `flex`, flexDirection: `row`, height, width }}>{month}</div>
-                </div>
-              );
-            })}
-        </div>
-      </div>
+      <Pager currentPageKey={yearMonthToKey(currentYearMonth)} pages={monthsInSlider} />
     </div>
   );
 };
