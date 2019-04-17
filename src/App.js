@@ -19,22 +19,6 @@ type State = {
 const shortDescriptionStyle = { padding: 0, margin: 0, marginLeft: 30, marginBottom: 15, marginTop: 5 };
 
 const EXAMPLES = {
-  Example8: {
-    component: Example8,
-    shortDescription: (
-      <ul style={shortDescriptionStyle}>
-        <li>Example</li>
-      </ul>
-    ),
-    description: (
-      <ul>
-        <li>{'Example8'}</li>
-        <li>
-          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
-        </li>
-      </ul>
-    ),
-  },
   Example7: {
     component: Example7,
     shortDescription: (
@@ -47,6 +31,22 @@ const EXAMPLES = {
         <li>{'Example7'}</li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example7.js">Source</a>
+        </li>
+      </ul>
+    ),
+  },
+  Example8: {
+    component: Example8,
+    shortDescription: (
+      <ul style={shortDescriptionStyle}>
+        <li>Example</li>
+      </ul>
+    ),
+    description: (
+      <ul>
+        <li>{'Example8'}</li>
+        <li>
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
         </li>
       </ul>
     ),

@@ -69,18 +69,18 @@ export const Example7 = () => {
         onNextMonthClicked={() => {
           const newYearMonth = nextYearMonth(currentYearMonth);
           const afterNewYearMonth = nextYearMonth(newYearMonth);
-          setCurrentYearMonth(newYearMonth);
           if (yearMonthToKey(afterNewYearMonth) === monthsInSlider[monthsInSlider.length - 1].key) {
             appendMonths(nextYearMonth(afterNewYearMonth));
           }
+          setCurrentYearMonth(newYearMonth);
         }}
         onPreviousMonthClicked={() => {
           const newYearMonth = previousYearMonth(currentYearMonth);
           const previousToNewYearMonth = previousYearMonth(newYearMonth);
-          setCurrentYearMonth(newYearMonth);
           if (yearMonthToKey(previousToNewYearMonth) === monthsInSlider[0].key) {
             prependMonths(previousYearMonth(previousToNewYearMonth));
           }
+          setCurrentYearMonth(newYearMonth);
         }}
       />
       <Pager currentPageKey={yearMonthToKey(currentYearMonth)} pages={monthsInSlider} />

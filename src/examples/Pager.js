@@ -1,7 +1,8 @@
 // @flow
 
-import React, { useEffect, useLayoutEffect, useRef, type Element } from 'react';
-import { animated, useSprings } from 'react-spring';
+import React, { useRef, useState, type Element } from 'react';
+import { animated } from 'react-spring';
+import { Spring } from 'react-spring/renderprops';
 import { useMeasure } from '@softbind/react-hooks';
 
 type Page = {
@@ -18,25 +19,12 @@ const xOffsetForPage = (pageIndex, currentPageIndex, width) => {
 const pageIndex = (pages, currentPageKey) => pages.findIndex(page => page.key === currentPageKey);
 
 export const Pager = ({ currentPageKey, pages }: { currentPageKey: string, pages: Array<Page> }) => {
+  const [isSetup, setIsSetup] = useState(false);
   const ref = useRef(null);
-  const { bounds: { width = -1 } = {} } = useMeasure(ref, 'bounds');
-  // Set the spring x-positions to 0. We need to wait for useMeasure, we don't know the correct values initially.
-  const [springs, springsSet] = useSprings(pages.length, () => ({ x: 0 }));
-
-  useLayoutEffect(() => {
-    springsSet(index => ({ x: xOffsetForPage(index, pageIndex(pages, currentPageKey), width), immediate: true }));
-  }, [pages]);
-
-  // This effect handles animating the page x-positions when the currentPageIndex changes.
-  useEffect(() => {
-    springsSet(index => ({ x: xOffsetForPage(index, pageIndex(pages, currentPageKey), width), immediate: false }));
-  }, [currentPageKey]);
-
-  // This effect handles initially placing the pages. If the width changes, that placement changes.
-  useEffect(() => {
-    // As the window resizes immediately update the x-coord, don't animate it.
-    springsSet(index => ({ x: xOffsetForPage(index, pageIndex(pages, currentPageKey), width), immediate: true }));
-  }, [width]);
+  const { bounds: { width = null } = {} } = useMeasure(ref, 'bounds');
+  const xCoordsForPages = width
+    ? pages.map((page, index) => xOffsetForPage(index, pageIndex(pages, currentPageKey), width))
+    : null;
 
   return (
     <div
@@ -51,14 +39,28 @@ export const Pager = ({ currentPageKey, pages }: { currentPageKey: string, pages
         width: `100%`,
       }}
     >
-      {springs.map(({ x }, i) => (
-        <animated.div
-          key={pages[i].key}
-          style={{ position: `absolute`, transform: x.interpolate(x => `translate3d(${x}px,0,0)`) }}
-        >
-          {pages[i].element}
-        </animated.div>
-      ))}
+      {xCoordsForPages &&
+        xCoordsForPages.map((x, i) => (
+          <Spring
+            key={pages[i].key}
+            to={{ transform: `translate3d(${x}px,0,0)` }}
+            immediate={!isSetup}
+            onStart={() => setIsSetup(true)}
+          >
+            {props => (
+              <animated.div
+                style={{
+                  position: `absolute`,
+                  height: `100%`,
+                  width: `100%`,
+                  ...props,
+                }}
+              >
+                {pages[i].element}
+              </animated.div>
+            )}
+          </Spring>
+        ))}
     </div>
   );
 };
