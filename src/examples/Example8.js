@@ -14,14 +14,24 @@ const pageForKey = (key: number | string) => {
       <div
         style={{
           display: `flex`,
-          height: 100,
-          width: 100,
-          backgroundColor: bgColor,
+          height: `100%`,
+          width: `100%`,
           alignItems: `center`,
           justifyContent: `center`,
         }}
       >
-        <p style={{ fontSize: `1.3em`, fontWeight: `bold`, color: fgColor }}>{key}</p>
+        <div
+          style={{
+            display: `flex`,
+            backgroundColor: bgColor,
+            height: 100,
+            width: 100,
+            alignItems: `center`,
+            justifyContent: `center`,
+          }}
+        >
+          <div style={{ fontSize: `1.3em`, fontWeight: `bold`, color: fgColor }}>{key}</div>
+        </div>
       </div>
     ),
   };
@@ -54,11 +64,22 @@ export const Example8 = () => {
   };
 
   return (
-    <div style={{ flex: 1, width: `100%`, alignItems: `center`, justifyContent: `center` }}>
-      <button onClick={prependPages}>Prepend Pages</button>
-      <button onClick={() => setCurrentPage(prevKey => (prevKey === minKey ? maxKey : prevKey - 1))}>Left</button>
-      <button onClick={() => setCurrentPage(prevKey => (prevKey === maxKey ? minKey : prevKey + 1))}>Right</button>
-      <button onClick={appendPages}>Append Pages</button>
+    <div
+      style={{
+        display: `flex`,
+        height: `100%`,
+        width: `100%`,
+        alignItems: `center`,
+        justifyContent: `center`,
+        flexDirection: `column`,
+      }}
+    >
+      <div>
+        <button onClick={prependPages}>Prepend Pages</button>
+        <button onClick={() => setCurrentPage(prevKey => (prevKey === minKey ? maxKey : prevKey - 1))}>Left</button>
+        <button onClick={() => setCurrentPage(prevKey => (prevKey === maxKey ? minKey : prevKey + 1))}>Right</button>
+        <button onClick={appendPages}>Append Pages</button>
+      </div>
       <Pager currentPageKey={`pg${currentPage}`} pages={pages} />
     </div>
   );
