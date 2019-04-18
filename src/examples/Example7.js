@@ -9,13 +9,18 @@ import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeD
 import { nextYearMonth, previousYearMonth } from '../lib/util/date';
 import { DefaultCalendarHeading } from '../lib/components/defaults/DefaultCalendarHeading';
 
-const Day = ({ date }: { date: Date }) => (
-  <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart` }} className="calendar-day">
-    <div style={{ display: 'flex', flex: 1, margin: 5 }}>{`${date.getMonth() + 1} ${date.getDate()}`}</div>
-  </div>
-);
-
 const locale = 'en-us';
+
+const Day = ({ date }: { date: Date }) => {
+  const dayNumber = date.getDate();
+  const dayText = dayNumber === 1 ? `${date.toLocaleDateString(locale, { month: 'short' })} ${dayNumber}` : dayNumber;
+  return (
+    <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart`, height: 100 }} className="calendar-day">
+      <div style={{ display: 'flex', flex: 1, margin: 5 }}>{dayText}</div>
+    </div>
+  );
+};
+
 const weekdayNames = localizedWeekdayNames(locale, 'long');
 const renderDayHeading = (dayIndex: number): Node => <div>{weekdayNames[dayIndex]}</div>;
 const CalendarMonth = ({ year, month }: { year: number, month: number }) => (
@@ -39,27 +44,25 @@ const monthSliderEntry = (yearMonth): { key: string, element: any } => ({
 export const Example7 = () => {
   const [currentYearMonth, setCurrentYearMonth] = useState<{ year: number, month: number }>({ year: 2019, month: 6 });
   const [monthsInSlider, setMonthsInSlider] = useState<Array<{ key: string, element: any }>>([
-    monthSliderEntry(previousYearMonth(previousYearMonth(currentYearMonth))),
     monthSliderEntry(previousYearMonth(currentYearMonth)),
     monthSliderEntry(currentYearMonth),
     monthSliderEntry(nextYearMonth(currentYearMonth)),
-    monthSliderEntry(nextYearMonth(nextYearMonth(currentYearMonth))),
   ]);
 
   const appendMonths = appendStartingAtYearMonth => {
-    setMonthsInSlider(prevMonths => [
-      ...prevMonths,
-      monthSliderEntry(appendStartingAtYearMonth),
-      monthSliderEntry(nextYearMonth(appendStartingAtYearMonth)),
-    ]);
+    setMonthsInSlider(prevMonths => {
+      // If we have more than 5 months, start dropping extras.
+      const leadingMonths = prevMonths.length > 5 ? prevMonths.slice(1, prevMonths.length) : prevMonths;
+      return [...leadingMonths, monthSliderEntry(appendStartingAtYearMonth)];
+    });
   };
 
   const prependMonths = prependStartingAtYearMonth => {
-    setMonthsInSlider(prevMonths => [
-      monthSliderEntry(previousYearMonth(prependStartingAtYearMonth)),
-      monthSliderEntry(prependStartingAtYearMonth),
-      ...prevMonths,
-    ]);
+    // If we have more than 5 months, start dropping extras.
+    setMonthsInSlider(prevMonths => {
+      const trailingMonths = prevMonths.length > 5 ? prevMonths.slice(0, prevMonths.length - 1) : prevMonths;
+      return [monthSliderEntry(prependStartingAtYearMonth), ...trailingMonths];
+    });
   };
 
   return (
@@ -68,17 +71,15 @@ export const Example7 = () => {
         title={localizedYearMonth(locale, 'long', 'numeric', currentYearMonth.year, currentYearMonth.month)}
         onNextMonthClicked={() => {
           const newYearMonth = nextYearMonth(currentYearMonth);
-          const afterNewYearMonth = nextYearMonth(newYearMonth);
-          if (yearMonthToKey(afterNewYearMonth) === monthsInSlider[monthsInSlider.length - 1].key) {
-            appendMonths(nextYearMonth(afterNewYearMonth));
+          if (yearMonthToKey(newYearMonth) === monthsInSlider[monthsInSlider.length - 1].key) {
+            appendMonths(nextYearMonth(newYearMonth));
           }
           setCurrentYearMonth(newYearMonth);
         }}
         onPreviousMonthClicked={() => {
           const newYearMonth = previousYearMonth(currentYearMonth);
-          const previousToNewYearMonth = previousYearMonth(newYearMonth);
-          if (yearMonthToKey(previousToNewYearMonth) === monthsInSlider[0].key) {
-            prependMonths(previousYearMonth(previousToNewYearMonth));
+          if (yearMonthToKey(newYearMonth) === monthsInSlider[0].key) {
+            prependMonths(previousYearMonth(newYearMonth));
           }
           setCurrentYearMonth(newYearMonth);
         }}
