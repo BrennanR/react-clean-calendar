@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { navigate, Location, Router } from '@reach/router';
+import { Link, Location, Router } from '@reach/router';
 
 import { Example1 } from './examples/Example1';
 import { Example2 } from './examples/Example2';
@@ -204,18 +204,10 @@ class App extends Component<{}> {
                 <form style={{ display: 'flex', flexDirection: 'column' }}>
                   {Object.keys(EXAMPLES).map(key => (
                     <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
-                      <label style={{ display: 'flex', flexDirection: 'row' }}>
-                        <input
-                          type="radio"
-                          name={key}
-                          value={key}
-                          checked={key === exampleKey}
-                          onChange={() => {
-                            navigate(key);
-                          }}
-                        />
-                        {key}
-                      </label>
+                      <Link to={`/${key}`}>
+                        {key === exampleKey && <span style={{ fontWeight: `bold` }}>{`>>> `}</span>}
+                        <span>{`${key}`}</span>
+                      </Link>
                       <div>{EXAMPLES[key].shortDescription}</div>
                     </div>
                   ))}
@@ -225,7 +217,12 @@ class App extends Component<{}> {
                 style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
                 className="App"
               >
-                <div style={{ marginTop: 5, marginBottom: 5 }}>{EXAMPLES[exampleKey].description}</div>
+                <div style={{ marginTop: 5, marginBottom: 5 }}>
+                  <ul>
+                    <li style={{ fontWeight: `bold` }}>{exampleKey}</li>
+                  </ul>
+                  {EXAMPLES[exampleKey].description}
+                </div>
                 <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
                 <Router style={{ display: `flex`, flexDirection: `row`, flex: 1, width: '100%' }}>
                   {Object.keys(EXAMPLES).map(key => this.renderExample(EXAMPLES[key].component, key))}
