@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { navigate, Location, Router } from '@reach/router';
 
 import { Example1 } from './examples/Example1';
 import { Example2 } from './examples/Example2';
@@ -12,61 +13,9 @@ import { Example7 } from './examples/Example7';
 import { Example8 } from './examples/Example8';
 import './App.css';
 
-type State = {
-  selectedExample: string,
-};
-
 const shortDescriptionStyle = { padding: 0, margin: 0, marginLeft: 30, marginBottom: 15, marginTop: 5 };
 
 const EXAMPLES = {
-  Example7: {
-    component: Example7,
-    shortDescription: (
-      <ul style={shortDescriptionStyle}>
-        <li>Example</li>
-      </ul>
-    ),
-    description: (
-      <ul>
-        <li>{'Example7'}</li>
-        <li>
-          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example7.js">Source</a>
-        </li>
-      </ul>
-    ),
-  },
-  Example8: {
-    component: Example8,
-    shortDescription: (
-      <ul style={shortDescriptionStyle}>
-        <li>Example</li>
-      </ul>
-    ),
-    description: (
-      <ul>
-        <li>{'Example8'}</li>
-        <li>
-          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
-        </li>
-      </ul>
-    ),
-  },
-  Example6: {
-    component: Example6,
-    shortDescription: (
-      <ul style={shortDescriptionStyle}>
-        <li>Example</li>
-      </ul>
-    ),
-    description: (
-      <ul>
-        <li>{'Example'}</li>
-        <li>
-          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example6.js">Source</a>
-        </li>
-      </ul>
-    ),
-  },
   Example1: {
     component: Example1,
     shortDescription: (
@@ -177,61 +126,115 @@ const EXAMPLES = {
       </ul>
     ),
   },
+  Example6: {
+    component: Example6,
+    shortDescription: (
+      <ul style={shortDescriptionStyle}>
+        <li>styled events</li>
+      </ul>
+    ),
+    description: (
+      <ul>
+        <li>{'Google calendar style events in day cells.'}</li>
+        <li>
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example6.js">Source</a>
+        </li>
+      </ul>
+    ),
+  },
+  Example7: {
+    component: Example7,
+    shortDescription: (
+      <ul style={shortDescriptionStyle}>
+        <li>{'animated paging'}</li>
+      </ul>
+    ),
+    description: (
+      <ul>
+        <li>{'Animated paging between calendar months.'}</li>
+        <li>
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example7.js">Source</a>
+        </li>
+      </ul>
+    ),
+  },
+  Example8: {
+    component: Example8,
+    shortDescription: (
+      <ul style={shortDescriptionStyle}>
+        <li>colored squares</li>
+      </ul>
+    ),
+    description: (
+      <ul>
+        <li>{'Paging between colored squares!'}</li>
+        <li>
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
+        </li>
+      </ul>
+    ),
+  },
 };
 
-class App extends Component<{}, State> {
-  constructor(props: {}) {
-    super(props);
-    this.state = { selectedExample: Object.keys(EXAMPLES)[0] };
-  }
-
-  renderExample(exampleComponent: any) {
+class App extends Component<{}> {
+  renderExample(exampleComponent: any, path: string) {
     const ExampleComponent = exampleComponent;
-    return <ExampleComponent />;
+    return <ExampleComponent key={path} path={path} />;
   }
 
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            borderStyle: 'solid',
-            borderColor: 'black',
-            borderWidth: 0,
-            borderRightWidth: 2,
-            padding: 10,
-            width: 200,
-          }}
-        >
-          <form style={{ display: 'flex', flexDirection: 'column' }}>
-            {Object.keys(EXAMPLES).map(key => (
-              <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
-                <label style={{ display: 'flex', flexDirection: 'row' }}>
-                  <input
-                    type="radio"
-                    name={key}
-                    value={key}
-                    checked={key === this.state.selectedExample}
-                    onChange={() => this.setState({ selectedExample: key })}
-                  />
-                  {key}
-                </label>
-                <div>{EXAMPLES[key].shortDescription}</div>
+      <Location>
+        {context => {
+          const exampleKey = context.location.pathname.substring(1);
+          return (
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  borderStyle: 'solid',
+                  borderColor: 'black',
+                  borderWidth: 0,
+                  borderRightWidth: 2,
+                  padding: 10,
+                  width: 200,
+                }}
+              >
+                <form style={{ display: 'flex', flexDirection: 'column' }}>
+                  {Object.keys(EXAMPLES).map(key => (
+                    <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
+                      <label style={{ display: 'flex', flexDirection: 'row' }}>
+                        <input
+                          type="radio"
+                          name={key}
+                          value={key}
+                          checked={key === exampleKey}
+                          onChange={() => {
+                            navigate(key);
+                          }}
+                        />
+                        {key}
+                      </label>
+                      <div>{EXAMPLES[key].shortDescription}</div>
+                    </div>
+                  ))}
+                </form>
               </div>
-            ))}
-          </form>
-        </div>
-        <div
-          style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
-          className="App"
-        >
-          <div style={{ marginTop: 5, marginBottom: 5 }}>{EXAMPLES[this.state.selectedExample].description}</div>
-          <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
-          {this.renderExample(EXAMPLES[this.state.selectedExample].component)}
-        </div>
-      </div>
+              <div
+                style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
+                className="App"
+              >
+                <div style={{ marginTop: 5, marginBottom: 5 }}>{EXAMPLES[exampleKey].description}</div>
+                <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
+                <Router style={{ display: `flex`, flexDirection: `row`, flex: 1, width: '100%' }}>
+                  {Object.keys(EXAMPLES).map(key => this.renderExample(EXAMPLES[key].component, key))}
+                </Router>
+              </div>
+            </div>
+          );
+        }}
+      </Location>
     );
   }
 }

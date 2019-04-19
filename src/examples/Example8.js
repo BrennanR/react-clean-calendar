@@ -30,7 +30,7 @@ const pageForKey = (key: number | string) => {
             justifyContent: `center`,
           }}
         >
-          <div style={{ fontSize: `1.3em`, fontWeight: `bold`, color: fgColor }}>{key}</div>
+          <div style={{ fontSize: `1.4em`, fontWeight: `bold`, color: fgColor }}>{key}</div>
         </div>
       </div>
     ),
