@@ -49,6 +49,13 @@ Note: all functions and components accept and return 1-indexed month values (1=J
 ### DefaultCalendarHeading
 - A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
 
+#### Available Props
+| Name              | Required | Type                             | Description |
+|-------------------|----------|----------------------------------|------------------------------------------------------|
+| title | yes | string | A title for the month. It will be centered. |
+| onNextMonthClicked | yes | () => void | A function to call when the user clicks the next month button. |
+| onPreviousMonthClicked | yes | () => void | A function to call when the user clicks the previous month button. |
+
 ### localizedWeekdayNamesStartingWith
 
 - Provided with a locale and format, this will return weekday names you can display as calendar day headings.
