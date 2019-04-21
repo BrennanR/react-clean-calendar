@@ -56,6 +56,16 @@ Note: all functions and components accept and return 1-indexed month values (1=J
 | onNextMonthClicked | yes | () => void | A function to call when the user clicks the next month button. |
 | onPreviousMonthClicked | yes | () => void | A function to call when the user clicks the previous month button. |
 
+Examples:
+
+```jsx
+<DefaultCalendarHeading
+  title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
+  onNextMonthClicked={() => this.setState({ ...nextMonth(this.state.year, this.state.month) })}
+  onPreviousMonthClicked={() => this.setState({ ...previousMonth(this.state.year, this.state.month) })}
+/>
+```
+
 ### localizedWeekdayNamesStartingWith
 
 - Provided with a locale and format, this will return weekday names you can display as calendar day headings.
