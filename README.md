@@ -9,7 +9,26 @@ North America, Monday in Europe) will render enough rows to display each day of 
 The calendar provides little to no styling for content inside of day cells. A `renderDay` prop is provided that lets
 you control and render the day exactly how you'd like.
 
-## Example
+## Exports
+
+Note: this library uses 1-indexed month values (1=Jan, 12=Dec).
+
+### Calendar
+- The main react calendar component.
+
+#### Available Props
+| Name              | Required | Type                             | Description |
+|-------------------|----------|----------------------------------|------------------------------------------------------|
+| year              | yes | number                                | The current calendar year to show.                    |
+| month             | yes | number                                | The current calendar month to show, 1-12.             |
+| locale            | yes | string                                | A string with a BCP 47 language tag, or an array of such strings. See [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Parameters).|
+| renderDay         | yes | (date: Date, cellID: string) => Node  | A render function to render one calendar day's contents. |
+| firstWeekday      | no  | Weekday                               | The day of the week represented by the first calendar column. This defaults to 0. Weekday is an enum of 0-6, 0-Sun, 6-Sat. |
+| renderDayHeading  | no  | (dayIndex: Weekday) => Node            | A render function to render a heading for the day of the week columns. dayIndex is an enum of 0-6, 0-Sun, 6-Sat.  |
+| renderHeading     | no  | () => Node                            | A render function to render a heading for the entire calendar. Typically this is where your buttons to page between months should go. |
+| borderOptions     | no  | BorderOptions                         | Either the string "no-border" or an object `{color: string, width: number }`. For advanced usages you may want to implement border rendering in the `renderDay` prop. |
+
+Examples:
 
 ```JSX
 import React, { Component } from 'react';
@@ -27,25 +46,6 @@ const App = (props) => {
 }
 ```
 
-Note: all functions and components accept and return 1-indexed month values (1=Jan, 12=Dec).
-
-## Exports
-
-### Calendar
-- The main react calendar component.
-
-#### Available Props
-| Name              | Required | Type                             | Description |
-|-------------------|----------|----------------------------------|------------------------------------------------------|
-| year              | yes | number                                | The current calendar year to show.                    |
-| month             | yes | number                                | The current calendar month to show, 1-12.             |
-| locale            | yes | string                                | A string with a BCP 47 language tag, or an array of such strings. See [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Parameters).|
-| renderDay         | yes | (date: Date, cellID: string) => Node  | A render function to render one calendar day's contents. |
-| firstWeekday      | no  | Weekday                               | The day of the week represented by the first calendar column. This defaults to 0. Weekday is an enum of 0-6, 0-Sun, 6-Sat. |
-| renderDayHeading  | no  | (dayIndex: Weekday) => Node            | A render function to render a heading for the day of the week columns. dayIndex is an enum of 0-6, 0-Sun, 6-Sat.  |
-| renderHeading     | no  | () => Node                            | A render function to render a heading for the entire calendar. Typically this is where your buttons to page between months should go. |
-| borderOptions     | no  | BorderOptions                         | Either the string "no-border" or an object `{color: string, width: number }`. For advanced usages you may want to implement border rendering in the `renderDay` prop. |
-
 ### DefaultCalendarHeading
 - A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
 
@@ -58,7 +58,7 @@ Note: all functions and components accept and return 1-indexed month values (1=J
 
 Examples:
 
-```jsx
+```JSX
 <DefaultCalendarHeading
   title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
   onNextMonthClicked={() => this.setState({ ...nextMonth(this.state.year, this.state.month) })}
@@ -107,7 +107,7 @@ localizedYearMonth(
 )
 ```
 
-Examples
+Examples:
 
 ```javascript
 localizedYearMonth('en-us', 'short', 'numeric', 2019, 1)
@@ -126,7 +126,7 @@ nextMonth(
 ```
 
 
-Examples
+Examples:
 
 ```javascript
 nextMonth(2019, 12)
@@ -144,7 +144,7 @@ previousMonth(
 )
 ```
 
-Examples
+Examples:
 
 ```javascript
 previousMonth(2020, 1)
