@@ -3,6 +3,7 @@
   flex: 1 0 auto;
   flex-flow: column nowrap;
   align-items: stretch;
+  overflow: hidden;
 }
 
 .Month-week {

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link, Location, Router } from '@reach/router';
+import { navigate, Link, Location, Router } from '@reach/router';
 
 import { Example1 } from './examples/Example1';
 import { Example2 } from './examples/Example2';
@@ -176,7 +176,18 @@ const EXAMPLES = {
   },
 };
 
-class App extends Component<{}> {
+declare var window: any;
+declare var document: any;
+
+type Props = {};
+class App extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+    if (window && window.location.pathname === `/`) {
+      navigate(`/Example1`);
+    }
+  }
+
   renderExample(exampleComponent: any, path: string) {
     const ExampleComponent = exampleComponent;
     return <ExampleComponent key={path} path={path} />;
@@ -201,7 +212,11 @@ class App extends Component<{}> {
                   width: 200,
                 }}
               >
-                <form style={{ display: 'flex', flexDirection: 'column' }}>
+                <nav
+                  role="navigation"
+                  aria-label="Main navigation"
+                  style={{ display: 'flex', flexDirection: 'column' }}
+                >
                   {Object.keys(EXAMPLES).map(key => (
                     <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
                       <Link to={`/${key}`}>
@@ -211,16 +226,14 @@ class App extends Component<{}> {
                       <div>{EXAMPLES[key].shortDescription}</div>
                     </div>
                   ))}
-                </form>
+                </nav>
               </div>
               <div
                 style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
                 className="App"
               >
                 <div style={{ marginTop: 5, marginBottom: 5 }}>
-                  <ul>
-                    <li style={{ fontWeight: `bold` }}>{exampleKey}</li>
-                  </ul>
+                  <h1 style={{ fontWeight: `bold` }}>{exampleKey}</h1>
                   {EXAMPLES[exampleKey].description}
                 </div>
                 <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
