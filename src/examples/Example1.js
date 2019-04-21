@@ -90,14 +90,8 @@ export class Example1 extends Component<Props, State> {
     return (
       <DefaultCalendarHeading
         title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
-        onNextMonthClicked={() => {
-          const { year, month } = nextMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
-        onPreviousMonthClicked={() => {
-          const { year, month } = previousMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
+        onNextMonthClicked={() => this.setState({ ...nextMonth(this.state.year, this.state.month) })}
+        onPreviousMonthClicked={() => this.setState({ ...previousMonth(this.state.year, this.state.month) })}
       />
     );
   };

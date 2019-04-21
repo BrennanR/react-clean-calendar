@@ -13,6 +13,9 @@ type Event = {
   description: string,
 };
 
+// Hacky, but just for this example.
+const leftPadZeroOnMonth = value => (value.toString().length === 1 ? `0${value.toString()}` : value.toString());
+
 const Example6 = () => {
   const locale = 'en-us';
   const weekdayNames = localizedWeekdayNames(locale, 'long');
@@ -22,9 +25,9 @@ const Example6 = () => {
     month: new Date().getMonth() + 1,
   });
   const [events] = useState<Array<Event>>([
-    { date: '2019-04-15', description: 'Pay Day' },
-    { date: '2019-04-15', description: "Doctor's Appointment" },
-    { date: '2019-04-28', description: "Carl's Birthday" },
+    { date: `2019-${leftPadZeroOnMonth(yearMonth.month)}-15`, description: 'Pay Day' },
+    { date: `2019-${leftPadZeroOnMonth(yearMonth.month)}-15`, description: "Doctor's Appointment" },
+    { date: `2019-${leftPadZeroOnMonth(yearMonth.month)}-28`, description: "Carl's Birthday" },
   ]);
 
   const eventsOnDate = (date: Date) => {
@@ -112,14 +115,8 @@ const Example6 = () => {
     return (
       <DefaultCalendarHeading
         title={localizedYearMonth(locale, 'long', 'numeric', yearMonth.year, yearMonth.month)}
-        onNextMonthClicked={() => {
-          const { year, month } = nextMonth(yearMonth.year, yearMonth.month);
-          setYearMonth({ year, month });
-        }}
-        onPreviousMonthClicked={() => {
-          const { year, month } = previousMonth(yearMonth.year, yearMonth.month);
-          setYearMonth({ year, month });
-        }}
+        onNextMonthClicked={() => setYearMonth({ ...nextMonth(yearMonth.year, yearMonth.month) })}
+        onPreviousMonthClicked={() => setYearMonth({ ...previousMonth(yearMonth.year, yearMonth.month) })}
       />
     );
   };
