@@ -1,6 +1,6 @@
 # React Clean Calendar [![npm version](https://badge.fury.io/js/react-clean-calendar.png)](https://badge.fury.io/js/react-clean-calendar)
 
-A number of examples can be found here: [Examples](https://brennanr.github.io/react-clean-calendar/).
+A number of examples and recipes can be found here: [Examples and Recipes](https://brennanr.github.io/react-clean-calendar/).
 
 `react-clean-calendar` is a light-weight react calendar component that primarily aims to solve the date-math involved
 in rendering a calendar. The component, given a year, month, and 'first day of the week' (eg. traditionally Sunday in 
@@ -9,7 +9,30 @@ North America, Monday in Europe) will render enough rows to display each day of 
 The calendar provides little to no styling for content inside of day cells. A `renderDay` prop is provided that lets
 you control and render the day exactly how you'd like.
 
-## Example
+## Getting Started
+
+The easiest way to get started with this library is to browse the [examples and recipes](https://brennanr.github.io/react-clean-calendar/) and their associated source code.
+
+## Exports
+
+Note: this library uses 1-indexed month values (1=Jan, 12=Dec).
+
+### Calendar
+- The main react calendar component.
+
+#### Available Props
+| Name              | Required | Type                             | Description |
+|-------------------|----------|----------------------------------|------------------------------------------------------|
+| year              | yes | number                                | The current calendar year to show.                    |
+| month             | yes | number                                | The current calendar month to show, 1-12.             |
+| locale            | yes | string                                | A string with a BCP 47 language tag, or an array of such strings. See [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#Parameters).|
+| renderDay         | yes | (date: Date, cellID: string) => Node  | A render function to render one calendar day's contents. |
+| firstWeekday      | no  | Weekday                               | The day of the week represented by the first calendar column. This defaults to 0. Weekday is an enum of 0-6, 0-Sun, 6-Sat. |
+| renderDayHeading  | no  | (dayIndex: Weekday) => Node            | A render function to render a heading for the day of the week columns. dayIndex is an enum of 0-6, 0-Sun, 6-Sat.  |
+| renderHeading     | no  | () => Node                            | A render function to render a heading for the entire calendar. Typically this is where your buttons to page between months should go. |
+| borderOptions     | no  | BorderOptions                         | Either the string "no-border" or an object `{color: string, width: number }`. For advanced usages you may want to implement border rendering in the `renderDay` prop. |
+
+Examples:
 
 ```JSX
 import React, { Component } from 'react';
@@ -27,15 +50,26 @@ const App = (props) => {
 }
 ```
 
-Note: all functions and components accept and return 1-indexed month values (1=Jan, 12=Dec).
-
-## Exports
-
-### Calendar
-- The main react calendar component.
-
 ### DefaultCalendarHeading
 - A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
+- To use this you'll want to implement the `Calendar` component's `renderHeading` render prop. In that render function use this component. Many of the [examples](https://github.com/BrennanR/react-clean-calendar/tree/master/src/examples) demonstrate how to do this.
+
+#### Available Props
+| Name              | Required | Type                             | Description |
+|-------------------|----------|----------------------------------|------------------------------------------------------|
+| title | yes | string | A title for the month. It will be centered. |
+| onNextMonthClicked | yes | () => void | A function to call when the user clicks the next month button. |
+| onPreviousMonthClicked | yes | () => void | A function to call when the user clicks the previous month button. |
+
+Examples:
+
+```JSX
+<DefaultCalendarHeading
+  title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
+  onNextMonthClicked={() => this.setState({ ...nextMonth(this.state.year, this.state.month) })}
+  onPreviousMonthClicked={() => this.setState({ ...previousMonth(this.state.year, this.state.month) })}
+/>
+```
 
 ### localizedWeekdayNamesStartingWith
 
@@ -78,7 +112,7 @@ localizedYearMonth(
 )
 ```
 
-Examples
+Examples:
 
 ```javascript
 localizedYearMonth('en-us', 'short', 'numeric', 2019, 1)
@@ -97,7 +131,7 @@ nextMonth(
 ```
 
 
-Examples
+Examples:
 
 ```javascript
 nextMonth(2019, 12)
@@ -115,7 +149,7 @@ previousMonth(
 )
 ```
 
-Examples
+Examples:
 
 ```javascript
 previousMonth(2020, 1)
@@ -161,7 +195,9 @@ React clean calendar has no dependencies beyond `react` and `react-dom`.
 | Firefox | Latest         |
 | Safari  | Latest         |
 
-Older versions of Chrome, Edge, and Firefox will almost certainly work, however I do not test with old versions.
+These are the browser's that I _attempt_ to support. Please note that this is a project I work on in spare time and I can't guarantee my ability to always thoroughly test on every browser.
+
+Older versions of Chrome, Edge, and Firefox will almost certainly work, however I do not test with anything except the latest version of those browsers.
 
 If you encounter any issues with any of the listed browser please open an issue.
 
