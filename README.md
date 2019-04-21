@@ -48,6 +48,7 @@ const App = (props) => {
 
 ### DefaultCalendarHeading
 - A react component calendar heading. This is a simple implementation to get started with. It includes pagination buttons and a title.
+- To use this you'll want to implement the `Calendar` component's `renderHeading` render prop. In that render function use this component. Many of the [examples](https://github.com/BrennanR/react-clean-calendar/tree/master/src/examples) demonstrate how to do this.
 
 #### Available Props
 | Name              | Required | Type                             | Description |
