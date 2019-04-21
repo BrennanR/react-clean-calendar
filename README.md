@@ -173,7 +173,9 @@ React clean calendar has no dependencies beyond `react` and `react-dom`.
 | Firefox | Latest         |
 | Safari  | Latest         |
 
-Older versions of Chrome, Edge, and Firefox will almost certainly work, however I do not test with old versions.
+These are the browser's that I _attempt_ to support. Please note that this is a project I work on in spare time and I can't guarantee my ability to always thoroughly test on every browser.
+
+Older versions of Chrome, Edge, and Firefox will almost certainly work, however I do not test with anything except the latest version of those browsers.
 
 If you encounter any issues with any of the listed browser please open an issue.
 
