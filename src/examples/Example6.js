@@ -21,20 +21,11 @@ const Example6 = () => {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
   });
-  const [selectedCellIDs, setSelectedCellIDs] = useState<Array<string>>([]);
   const [events] = useState<Array<Event>>([
     { date: '2019-04-15', description: 'Pay Day' },
     { date: '2019-04-15', description: "Doctor's Appointment" },
     { date: '2019-04-28', description: "Carl's Birthday" },
   ]);
-
-  const onDayPress = (date: Date, cellID: string) => {
-    if (selectedCellIDs.indexOf(cellID) !== -1) {
-      setSelectedCellIDs(selectedCellIDs.filter(cID => cID !== cellID));
-    } else {
-      setSelectedCellIDs([...selectedCellIDs, cellID]);
-    }
-  };
 
   const eventsOnDate = (date: Date) => {
     return events.filter(event => event.date === date.toISOString().substring(0, 10));
@@ -56,7 +47,6 @@ const Example6 = () => {
       color = `black`;
     }
     const events = eventsOnDate(date);
-    const backgroundColor = selectedCellIDs.indexOf(cellID) !== -1 ? `yellow` : `white`;
     return (
       <div
         style={{
@@ -68,7 +58,6 @@ const Example6 = () => {
           justifyContent: 'center',
           cursor: 'pointer',
           userSelect: 'none',
-          backgroundColor,
         }}
         className="calendar-day"
       >
@@ -144,7 +133,6 @@ const Example6 = () => {
       renderHeading={renderHeading}
       renderDayHeading={renderDayHeading}
       borderOptions={{ width: 1, color: 'black' }}
-      onDayPress={onDayPress}
     />
   );
 };

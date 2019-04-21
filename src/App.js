@@ -194,12 +194,12 @@ class App extends Component<Props> {
                   width: 200,
                 }}
               >
+                <h4>Examples & Recipes</h4>
                 <nav
                   role="navigation"
                   aria-label="Main navigation"
                   style={{ display: 'flex', flexDirection: 'column' }}
                 >
-                  <h4>Examples & Recipes</h4>
                   {Object.keys(EXAMPLES).map(key => (
                     <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
                       <Link to={`/${key}`}>
@@ -210,6 +210,9 @@ class App extends Component<Props> {
                     </div>
                   ))}
                 </nav>
+                <h6>
+                  <a href="https://github.com/BrennanR/react-clean-calendar">Go To GitHub Project</a>
+                </h6>
               </div>
               <div
                 style={{ display: 'flex', flexDirection: `column`, flex: 1, height: '100%', justifyContent: 'center' }}
