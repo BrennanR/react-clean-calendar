@@ -1,6 +1,6 @@
 # React Clean Calendar [![npm version](https://badge.fury.io/js/react-clean-calendar.png)](https://badge.fury.io/js/react-clean-calendar)
 
-A number of examples can be found here: [Examples](https://brennanr.github.io/react-clean-calendar/).
+A number of examples and recipes can be found here: [Examples and Recipes](https://brennanr.github.io/react-clean-calendar/).
 
 `react-clean-calendar` is a light-weight react calendar component that primarily aims to solve the date-math involved
 in rendering a calendar. The component, given a year, month, and 'first day of the week' (eg. traditionally Sunday in 
@@ -8,6 +8,10 @@ North America, Monday in Europe) will render enough rows to display each day of 
 
 The calendar provides little to no styling for content inside of day cells. A `renderDay` prop is provided that lets
 you control and render the day exactly how you'd like.
+
+## Getting Started
+
+The easiest way to get started with this library is to browse the [examples and recipes](https://brennanr.github.io/react-clean-calendar/) and their associated source code.
 
 ## Exports
 
