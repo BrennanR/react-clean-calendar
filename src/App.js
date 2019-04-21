@@ -23,7 +23,7 @@ const EXAMPLES = {
         <li>paging</li>
         <li>weekday labels</li>
         <li>today indicator</li>
-        <li>clickable</li>
+        <li>focusable days</li>
       </ul>
     ),
     description: (
@@ -36,9 +36,6 @@ const EXAMPLES = {
         <li>
           {"It's using the "} <i>localizedWeekdayNames</i> {' function from '} <i>util/localizeDate</i>
           {' to display a properly localized weekday heading.'}
-        </li>
-        <li>
-          The calendar has a simple <i>onDayPress</i> implementation that highlights cells yellow.
         </li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example1.js">Source</a>
