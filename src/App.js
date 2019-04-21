@@ -10,7 +10,6 @@ import { Example4 } from './examples/Example4';
 import { Example5 } from './examples/Example5';
 import { Example6 } from './examples/Example6';
 import { Example7 } from './examples/Example7';
-import { Example8 } from './examples/Example8';
 import './App.css';
 
 const shortDescriptionStyle = { padding: 0, margin: 0, marginLeft: 30, marginBottom: 15, marginTop: 5 };
@@ -20,8 +19,6 @@ const EXAMPLES = {
     component: Example1,
     shortDescription: (
       <ul style={shortDescriptionStyle}>
-        <li>paging</li>
-        <li>weekday labels</li>
         <li>today indicator</li>
         <li>focusable days</li>
       </ul>
@@ -48,17 +45,13 @@ const EXAMPLES = {
     shortDescription: (
       <ul style={shortDescriptionStyle}>
         <li>french (fr-ca)</li>
-        <li>paging</li>
-        <li>weekday labels</li>
+        <li>custom heading</li>
       </ul>
     ),
     description: (
       <ul>
         <li>{"This is an example of an 'fr-ca' calendar with Sunday as its first day of the week."}</li>
-        <li>
-          {"It's using the default heading component that's included with the library in "}
-          <i>defaults/DefaultHeading.js.</i>
-        </li>
+        <li>{'Uses a custom heading to render the paging buttons on the right.'}</li>
         <li>
           {"It's using the "} <i>localizedWeekdayNames</i> {' function from '} <i>util/localizeDate</i>
           {' to display a properly localized weekday heading.'}
@@ -73,9 +66,7 @@ const EXAMPLES = {
     component: Example3,
     shortDescription: (
       <ul style={shortDescriptionStyle}>
-        <li>no paging</li>
-        <li>no labels</li>
-        <li>no borders</li>
+        <li>no styling</li>
       </ul>
     ),
     description: (
@@ -144,29 +135,22 @@ const EXAMPLES = {
     shortDescription: (
       <ul style={shortDescriptionStyle}>
         <li>{'animated paging'}</li>
+        <li>{'react-spring'}</li>
       </ul>
     ),
     description: (
       <ul>
-        <li>{'Animated paging between calendar months.'}</li>
+        <li>
+          {'Animated paging between calendar months using '}
+          <a href="https://www.react-spring.io/">react-spring</a>.
+        </li>
+        <li>
+          {`See the `}
+          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Pager.js">Pager</a>
+          {` code for how react-spring can be used to achieve this effect.`}
+        </li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example7.js">Source</a>
-        </li>
-      </ul>
-    ),
-  },
-  Example8: {
-    component: Example8,
-    shortDescription: (
-      <ul style={shortDescriptionStyle}>
-        <li>colored squares</li>
-      </ul>
-    ),
-    description: (
-      <ul>
-        <li>{'Paging between colored squares!'}</li>
-        <li>
-          <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example8.js">Source</a>
         </li>
       </ul>
     ),
@@ -214,6 +198,7 @@ class App extends Component<Props> {
                   aria-label="Main navigation"
                   style={{ display: 'flex', flexDirection: 'column' }}
                 >
+                  <h4>Examples & Recipes</h4>
                   {Object.keys(EXAMPLES).map(key => (
                     <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
                       <Link to={`/${key}`}>

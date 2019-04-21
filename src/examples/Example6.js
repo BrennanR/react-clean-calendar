@@ -89,7 +89,7 @@ const Example6 = () => {
               style={{
                 display: 'flex',
                 justifyContent: `center`,
-                width: `90%`,
+                width: `95%`,
                 backgroundColor: `#33B679`,
                 color: `white`,
                 borderRadius: 5,
