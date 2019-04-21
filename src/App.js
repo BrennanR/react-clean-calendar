@@ -150,6 +150,7 @@ const EXAMPLES = {
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Pager.js">Pager</a>
           {` code for how react-spring can be used to achieve this effect.`}
         </li>
+        <li>{'Click the next or previous month button to see the animation!'}</li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example7.js">Source</a>
         </li>
