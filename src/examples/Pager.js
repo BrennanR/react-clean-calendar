@@ -64,6 +64,7 @@ export const Pager = ({ currentPageKey, pages, numOffscreenPagesToAnimate = 2 }:
             {props => (
               <animated.div
                 style={{
+                  display: `flex`,
                   position: `absolute`,
                   height: `100%`,
                   width: `100%`,
