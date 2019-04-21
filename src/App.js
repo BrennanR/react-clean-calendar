@@ -34,6 +34,7 @@ const EXAMPLES = {
           {"It's using the "} <i>localizedWeekdayNames</i> {' function from '} <i>util/localizeDate</i>
           {' to display a properly localized weekday heading.'}
         </li>
+        <li>{'The days are focusable, try clicking a day or hitting tab and tabbing through the days.'}</li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example1.js">Source</a>
         </li>
