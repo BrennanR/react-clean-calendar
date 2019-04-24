@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/react-clean-calendar/precache-manifest.d5bc6f9eb24b279a3d3e5b9e479cc7cb.js"
+  "/react-clean-calendar/precache-manifest.bdc0dd5e316ae442a476f7645f659ab2.js"
 );
 
 workbox.clientsClaim();
