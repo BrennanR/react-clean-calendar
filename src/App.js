@@ -27,13 +27,9 @@ const EXAMPLES = {
       <ul>
         <li>{"This is an example of an 'en-us' calendar with Sunday as its first day of the week."}</li>
         <li>
-          {"It's using the default heading component that's included with the library in "}
-          <i>defaults/DefaultHeading.js.</i>
+          {"It's using the default heading component that's included with the library: 'DefaultCalendarHeading'."}
         </li>
-        <li>
-          {"It's using the "} <i>localizedWeekdayNames</i> {' function from '} <i>util/localizeDate</i>
-          {' to display a properly localized weekday heading.'}
-        </li>
+        <li>{"It's using the 'localizedWeekdayNames' function to display a properly localized weekday heading."}</li>
         <li>{'The days are focusable, try clicking a day or hitting tab and tabbing through the days.'}</li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example1.js">Source</a>
@@ -53,10 +49,7 @@ const EXAMPLES = {
       <ul>
         <li>{"This is an example of an 'fr-ca' calendar with Sunday as its first day of the week."}</li>
         <li>{'Uses a custom heading to render the paging buttons on the right.'}</li>
-        <li>
-          {"It's using the "} <i>localizedWeekdayNames</i> {' function from '} <i>util/localizeDate</i>
-          {' to display a properly localized weekday heading.'}
-        </li>
+        <li>{"It's using the 'localizedWeekdayNames' to display a properly localized weekday heading."}</li>
         <li>
           <a href="https://github.com/BrennanR/react-clean-calendar/blob/master/src/examples/Example2.js">Source</a>
         </li>
