@@ -203,6 +203,8 @@ If you encounter any issues with any of the listed browser please open an issue.
 
 While I don't actively test with mobile browsers, please file any issues with any modern mobile browsers as well.
 
+NOTE: babel-polyfill is used on the example site to support IE11 for some examples. It shouldn't be needed to use the library with IE11, however.
+
 ## UMD
 
 The UMD module uses the global variable `RCCal`. See this codepen for an example of the calendar using UMD imports for react, react-dom, react-clean-calendar, and babel.

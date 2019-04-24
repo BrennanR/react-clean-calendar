@@ -15,9 +15,6 @@ type CalendarProps = {|
   renderDayHeading?: (dayIndex: number) => Node,
   renderHeading?: () => Node,
   borderOptions?: BorderOptions,
-  // Since you can render the day as you please, onDayPress is a convenience method. You can implement your own
-  // onPress logic within your renderDay method, if you'd prefer.
-  onDayPress?: (date: Date, cellID: string) => void,
 |};
 
 export const Calendar = (props: CalendarProps) => {
@@ -31,7 +28,6 @@ export const Calendar = (props: CalendarProps) => {
         firstWeekday={props.firstWeekday || 0}
         renderDay={props.renderDay}
         renderDayHeading={props.renderDayHeading}
-        onDayPress={props.onDayPress}
         borderOptions={props.borderOptions}
       />
     </div>

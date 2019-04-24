@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 
 import { Calendar } from '../lib/Calendar';
-import { DefaultCalendarHeading } from '../lib/components/defaults/DefaultCalendarHeading';
 import { nextMonth, previousMonth } from '../lib/util/date';
 import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeDate';
 
@@ -28,17 +27,31 @@ export class Example2 extends Component<Props, State> {
 
   renderHeading = () => {
     return (
-      <DefaultCalendarHeading
-        title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
-        onNextMonthClicked={() => {
-          const { year, month } = nextMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
-        onPreviousMonthClicked={() => {
-          const { year, month } = previousMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
-      />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', marginTop: 5, marginBottom: 5 }}>
+        <div style={{ marginLeft: 10, fontSize: 20 }}>
+          {localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
+        </div>
+        <div style={{ marginRight: 10 }}>
+          <button
+            style={{ color: `red` }}
+            onClick={() => {
+              const { year, month } = previousMonth(this.state.year, this.state.month);
+              this.setState({ year, month });
+            }}
+          >
+            {'<<<'}
+          </button>
+          <button
+            style={{ color: `purple` }}
+            onClick={() => {
+              const { year, month } = nextMonth(this.state.year, this.state.month);
+              this.setState({ year, month });
+            }}
+          >
+            {'>>>'}
+          </button>
+        </div>
+      </div>
     );
   };
 

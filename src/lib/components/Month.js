@@ -14,7 +14,6 @@ type MonthProps = {|
   firstWeekday: Weekday,
   renderDay: (date: Date, cellID: string) => Node,
   renderDayHeading: ?(dayIndex: number) => Node,
-  onDayPress: ?(date: Date, cellID: string) => void,
   borderOptions?: BorderOptions,
 |};
 
@@ -96,7 +95,6 @@ export const Month = (props: MonthProps) => {
                 key={`${year}-${month}-${dayOffset}`}
                 id={`Month-day-${cellID}`}
                 className="Month-day"
-                onClick={() => props.onDayPress != null && props.onDayPress(cellDate, cellID)}
               >
                 {props.renderDay(cellDate, cellID)}
               </div>

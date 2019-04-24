@@ -11,7 +11,7 @@ import { localizedWeekdayNames, localizedYearMonth } from '../lib/util/localizeD
 type State = {
   year: number,
   month: number,
-  selectedCellIDs: Array<string>,
+  focusedCellID: ?string,
 };
 
 type Props = {};
@@ -26,14 +26,16 @@ export class Example1 extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const date = new Date();
-    this.state = { year: date.getFullYear(), month: date.getMonth() + 1, selectedCellIDs: [] };
+    this.state = { year: date.getFullYear(), month: date.getMonth() + 1, focusedCellID: null };
   }
 
-  onDayPress = (date: Date, cellID: string) => {
-    if (this.state.selectedCellIDs.indexOf(cellID) !== -1) {
-      this.setState({ selectedCellIDs: this.state.selectedCellIDs.filter(cID => cID !== cellID) });
-    } else {
-      this.setState({ selectedCellIDs: [...this.state.selectedCellIDs, cellID] });
+  onDayFocused = (date: Date, cellID: string) => {
+    this.setState({ focusedCellID: cellID });
+  };
+
+  onDayLostFocus = (date: Date, cellID: string) => {
+    if (this.state.focusedCellID === cellID) {
+      this.setState({ focusedCellID: null });
     }
   };
 
@@ -53,16 +55,27 @@ export class Example1 extends Component<Props, State> {
     } else if (dayIsInSelectedMonth) {
       color = `black`;
     }
-    const backgroundColor = this.state.selectedCellIDs.indexOf(cellID) !== -1 ? `yellow` : `white`;
+    // const backgroundColor = this.state.focusedCellID === cellID ? `yellow` : `white`;
+    const focusedStyle =
+      this.state.focusedCellID === cellID
+        ? {
+            backgroundColor: `yellow`,
+            boxShadow: `0px 0px 5px blue`,
+            overflow: `visible`,
+          }
+        : {};
     return (
       <div
+        tabIndex={0}
+        onFocus={() => this.onDayFocused(date, cellID)}
+        onBlur={() => this.onDayLostFocus(date, cellID)}
         style={{
           display: 'flex',
           flex: 1,
           justifyContent: 'flexStart',
           cursor: 'pointer',
           userSelect: 'none',
-          backgroundColor,
+          ...focusedStyle,
         }}
         className="calendar-day"
       >
@@ -77,14 +90,8 @@ export class Example1 extends Component<Props, State> {
     return (
       <DefaultCalendarHeading
         title={localizedYearMonth(this.locale, 'long', 'numeric', this.state.year, this.state.month)}
-        onNextMonthClicked={() => {
-          const { year, month } = nextMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
-        onPreviousMonthClicked={() => {
-          const { year, month } = previousMonth(this.state.year, this.state.month);
-          this.setState({ year, month });
-        }}
+        onNextMonthClicked={() => this.setState({ ...nextMonth(this.state.year, this.state.month) })}
+        onPreviousMonthClicked={() => this.setState({ ...previousMonth(this.state.year, this.state.month) })}
       />
     );
   };
@@ -99,7 +106,6 @@ export class Example1 extends Component<Props, State> {
         renderDayHeading={this.renderDayHeading}
         renderHeading={this.renderHeading}
         borderOptions={{ width: 1, color: 'black' }}
-        onDayPress={this.onDayPress}
       />
     );
   }
