@@ -51,7 +51,6 @@ export const Pager = ({ currentPageKey, pages, numOffscreenPagesToAnimate = 2 }:
       style={{
         position: `relative`,
         overflow: `hidden`,
-        display: `flex`,
         alignItems: `center`,
         justifyContent: `center`,
         height: `100%`,

@@ -15,8 +15,8 @@ const Day = ({ date }: { date: Date }) => {
   const dayNumber = date.getDate();
   const dayText = dayNumber === 1 ? `${date.toLocaleDateString(locale, { month: 'short' })} ${dayNumber}` : dayNumber;
   return (
-    <div style={{ display: 'flex', flex: 1, justifyContent: `flexStart` }} className="calendar-day">
-      <div style={{ display: 'flex', flex: 1, margin: 5 }}>{dayText}</div>
+    <div style={{ display: 'flex', flex: 1, flexBasis: `auto`, justifyContent: `flexStart` }} className="calendar-day">
+      <div style={{ display: 'flex', flex: 1, flexBasis: `auto`, margin: 5 }}>{dayText}</div>
     </div>
   );
 };
