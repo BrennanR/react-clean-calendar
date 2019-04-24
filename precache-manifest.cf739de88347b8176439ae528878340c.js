@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/react-clean-calendar/static/js/runtime~main.e3675146.js"
   },
   {
-    "revision": "be2120def87b4ecfff4b",
-    "url": "/react-clean-calendar/static/js/main.be3063fc.chunk.js"
+    "revision": "c74aab99bd343115258c",
+    "url": "/react-clean-calendar/static/js/main.983bdded.chunk.js"
   },
   {
     "revision": "3f4c66b12921ff214894",
     "url": "/react-clean-calendar/static/js/2.8d37c27a.chunk.js"
   },
   {
-    "revision": "be2120def87b4ecfff4b",
+    "revision": "c74aab99bd343115258c",
     "url": "/react-clean-calendar/static/css/main.817fdd96.chunk.css"
   },
   {
-    "revision": "921f081046e841e65f59cea4e858f98e",
+    "revision": "c1675e94779479e17a1df54b0a0c7127",
     "url": "/react-clean-calendar/index.html"
   }
 ];
