@@ -12,7 +12,7 @@ type CalendarProps = {|
   locale: string,
   firstWeekday?: Weekday, // This defaults to 0/Sunday.
   renderDay: (date: Date, cellID: string) => Node,
-  renderDayHeading?: (dayIndex: Weekday) => Node,
+  renderDayHeading?: (dayIndex: number) => Node,
   renderHeading?: () => Node,
   borderOptions?: BorderOptions,
 |};
