@@ -16,9 +16,6 @@ type State = {
 
 type Props = {};
 
-/** This example shows a calendar rendered in English with clickable days and paging implemented via the
- *  component's state.
- */
 export class Example1 extends Component<Props, State> {
   locale = 'en-us';
   localizedWeekdayNames = localizedWeekdayNames(this.locale, 'long');
@@ -55,7 +52,6 @@ export class Example1 extends Component<Props, State> {
     } else if (dayIsInSelectedMonth) {
       color = `black`;
     }
-    // const backgroundColor = this.state.focusedCellID === cellID ? `yellow` : `white`;
     const focusedStyle =
       this.state.focusedCellID === cellID
         ? {
