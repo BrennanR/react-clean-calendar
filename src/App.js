@@ -159,8 +159,8 @@ type Props = {};
 class App extends Component<Props> {
   constructor(props: Props) {
     super(props);
-    if (window && window.location.pathname === `/`) {
-      navigate(`/Example1`);
+    if (window && !window.location.pathname.includes('Example')) {
+      navigate(`${window.location.href}Example1`);
     }
   }
 
@@ -173,7 +173,9 @@ class App extends Component<Props> {
     return (
       <Location>
         {context => {
-          const exampleKey = context.location.pathname.substring(1);
+          const pathParts = context.location.pathname.split('/').filter(Boolean);
+          const exampleKey = pathParts.pop();
+          const routerBasePath = pathParts.join('/');
           return (
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%' }}>
               <div
@@ -196,7 +198,7 @@ class App extends Component<Props> {
                 >
                   {Object.keys(EXAMPLES).map(key => (
                     <div style={{ display: 'flex', flexDirection: 'column' }} key={key}>
-                      <Link to={`/${key}`}>
+                      <Link to={`${routerBasePath}/${key}/`}>
                         {key === exampleKey && <span style={{ fontWeight: `bold` }}>{`>>> `}</span>}
                         <span>{`${key}`}</span>
                       </Link>
@@ -217,7 +219,10 @@ class App extends Component<Props> {
                   {EXAMPLES[exampleKey].description}
                 </div>
                 <div style={{ backgroundColor: 'black', height: 1, width: '100%' }} />
-                <Router style={{ display: `flex`, flexDirection: `row`, flex: 1, width: '100%' }}>
+                <Router
+                  basepath={`${routerBasePath}/`}
+                  style={{ display: `flex`, flexDirection: `row`, flex: 1, width: '100%' }}
+                >
                   {Object.keys(EXAMPLES).map(key => this.renderExample(EXAMPLES[key].component, key))}
                 </Router>
               </div>
