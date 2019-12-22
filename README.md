@@ -1,5 +1,7 @@
 # React Clean Calendar [![npm version](https://badge.fury.io/js/react-clean-calendar.png)](https://badge.fury.io/js/react-clean-calendar)
 
+<img src="https://raw.githubusercontent.com/BrennanR/example-media/master/react-clean-calendar/react-clean-calendar-animated-paging.gif" alt="animated paging" width="400" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/BrennanR/example-media/master/react-clean-calendar/react-clean-calendar-day-events.png" alt="day events" width="400" />
+
 A number of examples and recipes can be found here: [Examples and Recipes](https://brennanr.github.io/react-clean-calendar/).
 
 `react-clean-calendar` is a light-weight react calendar component that primarily aims to solve the date-math involved
