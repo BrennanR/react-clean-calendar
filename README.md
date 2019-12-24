@@ -187,7 +187,7 @@ library is not for building a date-picker, although there's no reason it couldn'
 
 React clean calendar has no dependencies beyond `react` and `react-dom`.
 
-## Support Browsers
+## Supported Browsers
 
 | Browser | Tested Version |
 |---------|----------------|
